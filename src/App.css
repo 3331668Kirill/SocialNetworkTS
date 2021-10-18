@@ -1,53 +1,21 @@
-/*.App {*/
-/*  display: grid;*/
-  /*text-align: center;*/
-/*}*/
-
-
-/*@media (prefers-reduced-motion: no-preference) {*/
-/*  .App-logo {*/
-/*    animation: App-logo-spin infinite 20s linear;*/
-/*  }*/
-/*}*/
-
-.header {
-  grid-area: h;
-  background-color: #282c34;
-  /*min-height: 100vh;*/
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /*font-size: calc(10px + 2vmin);*/
-  /*color: yellow;*/
-
-  /*grid-template-areas:'h h' 'n c';*/
-
-  /*grid-template-rows: 10px 10px;*/
-  /*grid-template-columns: 10px 10px;*/
-  /*grid-gap: 10px;*/
-
+.App {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas:
+  "h h"
+  "n c";
 }
-.header img{
-  width: 150px;
-  height: 100px;
-}
-.nav {
-  width: 150px;
-  height: 120px;
-  grid-area: n;
-  background-color: yellow;
-}
-
-.content {
+.App_content {
   grid-area: c;
   background-color: aquamarine;
-  margin-left: 200px;
+  /*margin-left: 200px;*/
 }
 .content img{
-  width: 1000px;
-  height: 1000px;
+  width: 300px;
+  height: 300px;
 }
+
 .App-link {
   color: #61dafb;
 }
