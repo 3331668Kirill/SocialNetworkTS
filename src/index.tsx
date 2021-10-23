@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {state} from "./redux/state";
+
+
 
 ReactDOM.render(
 
-    <App />,
+    <App post={state.profilePage.posts} d={state.profilePage.dialogs} m={state.messagePage.messages} />,
 
   document.getElementById('root')
 );
