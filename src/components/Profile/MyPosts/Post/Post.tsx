@@ -5,7 +5,7 @@ export type PropsPostType = {
     message: string
     id?: number
     likesCount: number
-}
+   }
 
 const Post = (props: PropsPostType) => {
     return (

@@ -1,5 +1,7 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {PropsDialogItem} from "../components/Dialogs/dialogs";
+import React from "react";
+import {rerenderEntireTree} from "../render";
 
 type StateType = {
     profilePage: {
@@ -38,5 +40,15 @@ export let state: StateType = {
         ]
     }
 
+}
+// export type AddPostType = {
+//     addPost: (postMessage: string)=>void
+// }
+export let addPost:(postMessage: string)=>void = (postMessage: string) =>{
+    let newPost = {
+        id: 6, message: postMessage, likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
