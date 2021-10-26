@@ -8,11 +8,14 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
 
 
+
 type PropsAppType = {
     post:Array<PropsPostType>
     d:Array<PropsDialogItem>
     m:Array<{ id: number, message: string }>
     addPost: (postMessage: string)=>void
+    updateNewPostText: (newText:string) =>void
+    newPostText: string
     }
 
 function App(props:PropsAppType) {
@@ -25,7 +28,12 @@ function App(props:PropsAppType) {
             <Navbar/>
             <div className='App_content'>
                 <Route path='/messages' render={()=><Dialogs d={props.d} m={props.m}/>} />
-                <Route path='/profile' render={()=><Profile post={props.post} addPost={props.addPost}/>} />
+                <Route path='/profile' render={
+                    ()=><Profile
+                    post={props.post}
+                    addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
+                    newPostText={props.newPostText}/>} />
 
             </div>
         </div>

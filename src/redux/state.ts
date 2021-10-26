@@ -1,11 +1,11 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {PropsDialogItem} from "../components/Dialogs/dialogs";
-import React from "react";
 import {rerenderEntireTree} from "../render";
 
-type StateType = {
+export type StateType = {
     profilePage: {
         posts: Array<PropsPostType>
+        newPostText:string
         dialogs: Array<PropsDialogItem>
     }
     messagePage: {
@@ -22,6 +22,7 @@ export let state: StateType = {
             {id: 4, message: 'Ha ha ha', likesCount: 47},
             {id: 5, message: 'Bye', likesCount: 5}
         ],
+        newPostText: 'input here',
         dialogs: [
             {id: 1, name: 'Dims'},
             {id: 2, name: 'Ann'},
@@ -44,11 +45,18 @@ export let state: StateType = {
 // export type AddPostType = {
 //     addPost: (postMessage: string)=>void
 // }
-export let addPost:(postMessage: string)=>void = (postMessage: string) =>{
+export let addPost:(postMessage: string)=>void = () =>{
     let newPost = {
-        id: 6, message: postMessage, likesCount: 0
+        id: 6,
+        message: state.profilePage.newPostText,
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
     rerenderEntireTree(state)
+}
+export let updateNewPostText = (newText:string) =>{
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+
 }
 

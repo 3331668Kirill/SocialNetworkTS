@@ -1,25 +1,36 @@
-import React, {ReactElement} from "react";
+import React, {ReactElement, RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
 
 
-const MyPosts = (props: { post: Array<PropsPostType>, addPost: (postMessage: string)=>void} ) => {
+
+const MyPosts = (props: { post: Array<PropsPostType>,
+    addPost: (postMessage: string) => void,
+    updateNewPostText: (newText:string) =>void
+    newPostText: string
+
+}) => {
 
     let postsElements: Array<ReactElement> =
         props.post.map((p) => (<Post message={p.message} likesCount={p.likesCount}/>))
 
-    let newPostElement:React.RefObject<HTMLTextAreaElement> = React.createRef()
+    let newPostElement: RefObject<any> = React.createRef()
     let addPost = () => {
+        let text: string | null = newPostElement.current.value
+        if (text) {
+            props.addPost(text)
+            props.updateNewPostText('')
+        }
 
-        let text:any = newPostElement.current?.value
-        props.addPost(text)
-        //newPostElement.current?.value
+    }
+    let onPostChange = () => {
+        props.updateNewPostText(newPostElement.current.value)
     }
 
     return (
         <div>
             <div>
-                <textarea ref={newPostElement}> </textarea>
+                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post

@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {addPost} from "./redux/state";
+import {addPost, StateType, updateNewPostText} from "./redux/state";
 
-export let rerenderEntireTree = (state: { profilePage: any; messagePage: any; }) =>{
 
-ReactDOM.render(
+export let rerenderEntireTree = (state: StateType) => {
 
-    <App post={state.profilePage.posts}
-         d={state.profilePage.dialogs}
-         m={state.messagePage.messages}
-         addPost={addPost} />,
+    ReactDOM.render(
+        <App post={state.profilePage.posts}
+             d={state.profilePage.dialogs}
+             m={state.messagePage.messages}
+             newPostText={state.profilePage.newPostText}
+             addPost={addPost}
+             updateNewPostText={updateNewPostText}
+        />,
 
-  document.getElementById('root')
-);
+        document.getElementById('root')
+    );
 }
 
 
