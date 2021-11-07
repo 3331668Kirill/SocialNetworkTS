@@ -1,6 +1,8 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {PropsDialogItem} from "../components/Dialogs/dialogs";
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = (state:StateType) =>{
+    console.log('SSS')
+}
 
 export type StateType = {
     profilePage: {
@@ -58,5 +60,9 @@ export let updateNewPostText = (newText:string) =>{
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 
+}
+
+export const subscriber = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer
 }
 
