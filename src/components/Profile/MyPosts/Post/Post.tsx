@@ -1,10 +1,12 @@
 import React from "react";
 import s from './Post.module.css'
+import {ActionType} from "../../../../redux/state";
 
 export type PropsPostType = {
     message: string
     id?: number
     likesCount: number
+
    }
 
 const Post = (props: PropsPostType) => {

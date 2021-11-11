@@ -1,13 +1,15 @@
 import React, {ReactElement, RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
+import {ActionType} from "../../../redux/state";
+
 
 
 
 const MyPosts = (props: { post: Array<PropsPostType>,
-    addPost: (postMessage: string) => void,
-    updateNewPostText: (newText:string) =>void
+
     newPostText: string
+    dispatch:(action: ActionType)=>void
 
 }) => {
 
@@ -18,13 +20,13 @@ const MyPosts = (props: { post: Array<PropsPostType>,
     let addPost = () => {
         let text: string | null = newPostElement.current.value
         if (text) {
-            props.addPost(text)
-            props.updateNewPostText('')
+            props.dispatch({type: 'ADD-POST',  newText:text})
+
         }
 
     }
     let onPostChange = () => {
-        props.updateNewPostText(newPostElement.current.value)
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPostText:'' , newText:newPostElement.current.value})
     }
 
     return (
