@@ -14,6 +14,7 @@ let rerenderEntireTree = (state: StateType) => {
         <App post={state.profilePage.posts}
              d={state.profilePage.dialogs}
              m={state.messagePage.messages}
+             b={state.messagePage.newMessageBody}
              newPostText={state.profilePage.newPostText}
              dispatch={store.dispatch.bind(store)}
 

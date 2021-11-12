@@ -1,5 +1,13 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {PropsDialogItem} from "../components/Dialogs/dialogs";
+import {profileReducer} from "./profile-reducer";
+import {dialogReducer} from "./dialog-reducer";
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+
 
 export let store = {
     _state:  {
@@ -27,8 +35,10 @@ export let store = {
                 {id: 3, message: 'How are you'},
                 {id: 4, message: 'Fine'},
                 {id: 5, message: 'Bye'}
-            ]
-        }
+            ],
+            newMessageBody:''
+        },
+
 
     },
     getState(){
@@ -37,50 +47,28 @@ export let store = {
     _callSubscriber (state:StateType){
         console.log('SSS')
     },
-    // addPost(){
-    //
-    //     let newPost = {
-    //         id: 6,
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostText=''
-    //     this._callSubscriber(this._state)
-    // },
-    // updateNewPostText(newText:string){
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber(this._state)
-    //
-    // },
+
     subscriber (observer: (state: StateType) => void) {
         this._callSubscriber = observer
     },
     dispatch (action:ActionType){
-        if (action.type === 'ADD-POST'){
-            let newPost = {
-                id: 6,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText=''
-            this._callSubscriber(this._state)
-        }else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        this._state.messagePage = dialogReducer(this._state.messagePage,action)
             this._callSubscriber(this._state)
         }
 
-    }
+
 }
+
+
+
 
 export type ActionType = {
-    type: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
+    type: string                 //'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
     newPostText?: string
     newText:string
+    body:string
 }
-
-
 
 export type StateType = {
     profilePage: {
@@ -90,7 +78,7 @@ export type StateType = {
     }
     messagePage: {
         messages: Array<{ id: number, message: string }>
-
+        newMessageBody:string
     }
 }
 

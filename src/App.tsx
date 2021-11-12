@@ -14,6 +14,7 @@ type PropsAppType = {
     post:Array<PropsPostType>
     d:Array<PropsDialogItem>
     m:Array<{ id: number, message: string }>
+    b: string
     dispatch:(action:ActionType)=>void
 
     newPostText: string
@@ -28,7 +29,12 @@ function App(props:PropsAppType) {
             <Header/>
             <Navbar/>
             <div className='App_content'>
-                <Route path='/messages' render={()=><Dialogs d={props.d} m={props.m}/>} />
+                <Route path='/messages' render={
+                    ()=><Dialogs
+                        b={props.b}
+                        dispatch={props.dispatch}
+                        d={props.d}
+                        m={props.m}/>} />
                 <Route path='/profile' render={
                     ()=><Profile
                     post={props.post}

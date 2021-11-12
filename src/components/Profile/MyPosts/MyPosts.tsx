@@ -2,7 +2,7 @@ import React, {ReactElement, RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
 import {ActionType} from "../../../redux/state";
-
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 
@@ -18,15 +18,17 @@ const MyPosts = (props: { post: Array<PropsPostType>,
 
     let newPostElement: RefObject<any> = React.createRef()
     let addPost = () => {
-        let text: string | null = newPostElement.current.value
+        let text: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null = newPostElement.current.value
         if (text) {
-            props.dispatch({type: 'ADD-POST',  newText:text})
+            let action  = addPostActionCreator(text)
+            props.dispatch(action)
 
         }
 
     }
     let onPostChange = () => {
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPostText:'' , newText:newPostElement.current.value})
+        let action = updateNewPostTextActionCreator(newPostElement.current.value)
+        props.dispatch(action)
     }
 
     return (
