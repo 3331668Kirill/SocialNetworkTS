@@ -1,9 +1,9 @@
 import React from "react";
 import s from './profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/profileInfo";
 import {PropsPostType} from "./MyPosts/Post/Post";
-import {ActionType} from "../../redux/state";
+import {ActionType} from "../../redux/store";
+import MyPostsConteiner from "./MyPosts/MyPostsConteiner";
 
 
 const Profile = (props: { post: Array<PropsPostType>,
@@ -16,11 +16,9 @@ const Profile = (props: { post: Array<PropsPostType>,
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts post={props.post}
+            <MyPostsConteiner post={props.post}
                      dispatch={props.dispatch}
-
                      newPostText={props.newPostText}/>
-
         </div>
     )
 }

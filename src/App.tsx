@@ -6,7 +6,8 @@ import Profile from "./components/Profile/profile";
 import Dialogs, {PropsDialogItem} from "./components/Dialogs/dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
-import {ActionType} from "./redux/state";
+import {ActionType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/dialogsContainer";
 
 
 
@@ -30,7 +31,7 @@ function App(props:PropsAppType) {
             <Navbar/>
             <div className='App_content'>
                 <Route path='/messages' render={
-                    ()=><Dialogs
+                    ()=><DialogsContainer
                         b={props.b}
                         dispatch={props.dispatch}
                         d={props.d}

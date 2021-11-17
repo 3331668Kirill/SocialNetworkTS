@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Post.module.css'
-import {ActionType} from "../../../../redux/state";
+import {ActionType} from "../../../../redux/store";
 
 export type PropsPostType = {
     message: string

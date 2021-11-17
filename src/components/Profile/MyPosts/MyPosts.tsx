@@ -1,15 +1,16 @@
 import React, {ReactElement, RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
-import {ActionType} from "../../../redux/state";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 
-const MyPosts = (props: { post: Array<PropsPostType>,
 
+const MyPosts = (props: {
+    post: Array<PropsPostType>,
+    updateNewPostText:(text:'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null)=>void
+    addPost:(text:'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null)=>void
     newPostText: string
-    dispatch:(action: ActionType)=>void
+
 
 }) => {
 
@@ -20,15 +21,15 @@ const MyPosts = (props: { post: Array<PropsPostType>,
     let addPost = () => {
         let text: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null = newPostElement.current.value
         if (text) {
-            let action  = addPostActionCreator(text)
-            props.dispatch(action)
+            props.addPost(text)
 
         }
 
     }
     let onPostChange = () => {
-        let action = updateNewPostTextActionCreator(newPostElement.current.value)
-        props.dispatch(action)
+        let text: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null = newPostElement.current.value
+        props.updateNewPostText(text)
+
     }
 
     return (
