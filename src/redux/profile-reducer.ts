@@ -1,4 +1,4 @@
-import {ActionType, store} from "./store";
+import {ActionType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';

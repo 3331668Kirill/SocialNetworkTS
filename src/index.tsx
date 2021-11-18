@@ -6,19 +6,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {StateType} from "./redux/store";
+import {Provider} from "react-redux";
 
 
 let rerenderEntireTree = (state: StateType) => {
 
     ReactDOM.render(
-        <App post={state.profilePage.posts}
+       // <StoreContext.Provider value={'www'}>
+        <Provider store={store}>
+        <App
+            post={state.profilePage.posts}
              d={state.profilePage.dialogs}
              m={state.messagePage.messages}
              b={state.messagePage.newMessageBody}
              newPostText={state.profilePage.newPostText}
              dispatch={store.dispatch.bind(store)}
 
-        />,
+        />
+        </Provider>
+      //  </StoreContext.Provider>
+            ,
+
 
         document.getElementById('root')
     );

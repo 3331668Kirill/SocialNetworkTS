@@ -2,6 +2,8 @@ import React, {ChangeEvent, ReactElement} from 'react'
 import s from './dialogs.module.css'
 import DialogItem from "./DialogItem/dialogItem";
 import Message from "./Message/message";
+import { StoreContext } from '../../storeContext';
+
 
 
 export type PropsDialogItem = {
@@ -12,11 +14,14 @@ type PropsDialogsType = {
     d: Array<PropsDialogItem>
     m: Array<{ id: number, message: string }>
     b:string
+    supermessage:string
     onNewMessageChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
     onSendMessageClick:() => void
 
 }
+
 const Dialogs = (props: PropsDialogsType) => {
+    console.log(props)
    let dialogsElements: Array<ReactElement> = props.d.map(dialogs => (
         <DialogItem name={dialogs.name} id={dialogs.id}/>))
 
@@ -33,6 +38,13 @@ const Dialogs = (props: PropsDialogsType) => {
 
             <div className={s.dialogs_items}>
                 {dialogsElements}
+                {props.supermessage}
+                {/*<StoreContext.Consumer>*/}
+
+                {/*    {value => <div>{value} </div>}*/}
+
+                {/*</StoreContext.Consumer>*/}
+
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>

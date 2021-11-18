@@ -9,7 +9,7 @@ import MyPostsConteiner from "./MyPosts/MyPostsConteiner";
 const Profile = (props: { post: Array<PropsPostType>,
 
     newPostText:string
-    dispatch:(action:ActionType)=>void
+    //dispatch:(action:ActionType)=>void
 
 }) => {
 
@@ -17,7 +17,7 @@ const Profile = (props: { post: Array<PropsPostType>,
         <div className={s.content}>
             <ProfileInfo/>
             <MyPostsConteiner post={props.post}
-                     dispatch={props.dispatch}
+                     //dispatch={props.dispatch}
                      newPostText={props.newPostText}/>
         </div>
     )

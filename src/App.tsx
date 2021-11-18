@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./components/Header/header";
 import Navbar from "./components/Navbar/navbar";
 import Profile from "./components/Profile/profile";
-import Dialogs, {PropsDialogItem} from "./components/Dialogs/dialogs";
+import {PropsDialogItem} from "./components/Dialogs/dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType} from "./redux/store";
@@ -17,7 +17,6 @@ type PropsAppType = {
     m:Array<{ id: number, message: string }>
     b: string
     dispatch:(action:ActionType)=>void
-
     newPostText: string
     }
 
@@ -33,13 +32,13 @@ function App(props:PropsAppType) {
                 <Route path='/messages' render={
                     ()=><DialogsContainer
                         b={props.b}
-                        dispatch={props.dispatch}
+                        // dispatch={props.dispatch}
                         d={props.d}
                         m={props.m}/>} />
                 <Route path='/profile' render={
                     ()=><Profile
                     post={props.post}
-                    dispatch={props.dispatch}
+                    //dispatch={props.dispatch}
                     newPostText={props.newPostText}/>} />
 
             </div>
