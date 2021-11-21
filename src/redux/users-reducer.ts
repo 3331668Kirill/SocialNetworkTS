@@ -19,7 +19,6 @@ let initialState: TypeUsersPage ={
 ],
 }
 
-
 export const usersReducer = (state: TypeUsersPage = initialState, action: {type:string, userId:number, users:Array<TypeUsers>}) => {
     switch (action.type) {
         case FOLLOW:
