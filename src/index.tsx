@@ -9,17 +9,17 @@ import {StateType} from "./redux/store";
 import {Provider} from "react-redux";
 
 
-let rerenderEntireTree = (state: StateType) => {
+// let rerenderEntireTree = (state: StateType) => {
 
     ReactDOM.render(
        // <StoreContext.Provider value={'www'}>
         <Provider store={store}>
         <App
-            post={state.profilePage.posts}
-             d={state.profilePage.dialogs}
-             m={state.messagePage.messages}
-             b={state.messagePage.newMessageBody}
-             newPostText={state.profilePage.newPostText}
+            post={store.getState().profilePage.posts}
+             d={store.getState().profilePage.dialogs}
+             m={store.getState().messagePage.messages}
+             b={store.getState().messagePage.newMessageBody}
+             newPostText={store.getState().profilePage.newPostText}
              dispatch={store.dispatch.bind(store)}
 
         />
@@ -30,14 +30,16 @@ let rerenderEntireTree = (state: StateType) => {
 
         document.getElementById('root')
     );
-}
+// }
 
 
-rerenderEntireTree(store.getState())
+// rerenderEntireTree(store.getState())
 
-store.subscribe(()=>{
-    rerenderEntireTree(store.getState())
-})
+// store.subscribe(()=>{
+//     rerenderEntireTree(store.getState())
+// })
+
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -6,4 +6,7 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     messagePage: dialogReducer
 })
+
 export let store = createStore(reducers)
+
+

@@ -10,11 +10,11 @@ export type PropsDialogItem = {
     id: number
     name: string
 }
-type PropsDialogsType = {
+export type PropsDialogsType = {
     d: Array<PropsDialogItem>
     m: Array<{ id: number, message: string }>
     b:string
-    supermessage:string
+    supermessage?:string
     onNewMessageChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
     onSendMessageClick:() => void
 

@@ -8,6 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/dialogsContainer";
+import {Users} from "./components/Users/Users";
 
 
 
@@ -22,7 +23,7 @@ type PropsAppType = {
 
 function App(props:PropsAppType) {
 
-
+    console.log(props.b)
     return (
         <BrowserRouter>
         <div className="App">
@@ -40,6 +41,7 @@ function App(props:PropsAppType) {
                     post={props.post}
                     //dispatch={props.dispatch}
                     newPostText={props.newPostText}/>} />
+                <Route path={'/users'} render={()=> <Users/>} />
 
             </div>
         </div>
