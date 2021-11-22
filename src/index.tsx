@@ -21,6 +21,7 @@ import {Provider} from "react-redux";
              b={store.getState().messagePage.newMessageBody}
              newPostText={store.getState().profilePage.newPostText}
              dispatch={store.dispatch.bind(store)}
+            store={store.getState()}
 
         />
         </Provider>

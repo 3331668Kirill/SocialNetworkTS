@@ -9,6 +9,8 @@ import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/dialogsContainer";
 import {Users} from "./components/Users/Users";
+import UsersConteiner from "./components/Users/UsersConteiner";
+import {AppStateType} from "./redux/redux-store";
 
 
 
@@ -19,6 +21,7 @@ type PropsAppType = {
     b: string
     dispatch:(action:ActionType)=>void
     newPostText: string
+    store:AppStateType
     }
 
 function App(props:PropsAppType) {
@@ -41,7 +44,7 @@ function App(props:PropsAppType) {
                     post={props.post}
                     //dispatch={props.dispatch}
                     newPostText={props.newPostText}/>} />
-                <Route path={'/users'} render={()=> <Users/>} />
+                <Route path={'/users'} render={()=> <UsersConteiner users={props.store.usersPage.users}/>} />
 
             </div>
         </div>

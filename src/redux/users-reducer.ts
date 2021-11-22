@@ -3,11 +3,11 @@ const SET_USERS = 'SET_USERS'
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 
-type TypeUsers = {
+export type TypeUsers = {
     id: number, followed:boolean, fullName: string, status:string, location: {city:string, country:string}
 }
 
-type TypeUsersPage = {
+export type TypeUsersPage = {
     users: Array<TypeUsers>
 
 }
@@ -31,7 +31,7 @@ export const usersReducer = (state: TypeUsersPage = initialState, action: {type:
         case UNFOLLOW:
             return {...state, users: state.users.map(t=>{
                     if (t.id === action.userId) {
-                        return {...t, unfollowed: true}
+                        return {...t, followed: false}
                     }
                     return t
                 })}
@@ -40,6 +40,15 @@ export const usersReducer = (state: TypeUsersPage = initialState, action: {type:
         default:
             return state
     }
+}
+
+export type FollowACType = {
+    type:string
+    userId:number
+}
+export type SetUserACType = {
+    type:string
+    users:Array<TypeUsers>
 }
 
 export let followActionCreator = (userId:number) =>{
@@ -54,7 +63,7 @@ export let unFollowActionCreator = (userId:number) =>{
     return {
         type: UNFOLLOW,
         userId
-    }
+    } as const
 }
 export const setUsersActionCreator = (users:Array<TypeUsers>) =>{
     return {

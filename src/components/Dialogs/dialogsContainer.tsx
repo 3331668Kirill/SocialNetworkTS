@@ -1,14 +1,20 @@
 import React, {ChangeEvent} from 'react'
 import {ActionType, StateType} from "../../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialog-reducer";
-import Dialogs from "./dialogs";
+import Dialogs, {PropsDialogItem} from "./dialogs";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
-
+// type MapStateToPropsType = {
+//     d:Array<PropsDialogItem>
+//     m:Array<{ id:number, message:string }>
+//     b:string
+//     supermessage:string
+// }
 
 let text= 'HHHHHH'
 
-const mapStateToProps:any = (state:StateType) =>{
+const mapStateToProps:any = (state:AppStateType) =>{
     console.log(state)
     return {
         d:state.profilePage.dialogs,
