@@ -1,10 +1,11 @@
+import * as url from "url";
 
 const SET_USERS = 'SET_USERS'
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 
 export type TypeUsers = {
-    id: number, followed:boolean, fullName: string, status:string, location: {city:string, country:string}
+    id: number, followed:boolean, name: string, status:string,photos:{small:string | undefined, large:string | undefined}, location?: {city:string, country:string}
 }
 
 export type TypeUsersPage = {
@@ -13,9 +14,9 @@ export type TypeUsersPage = {
 }
 let initialState: TypeUsersPage ={
     users: [
-    {id: 1, followed: false, fullName: 'Dmitry', status: 'Director', location:{city:'Minsk', country:'Belarus'}},
-    {id: 2, followed: true, fullName: 'George', status: 'Engineer', location:{city:'Minsk', country:'Belarus'}},
-    {id: 3, followed: false, fullName: 'Andrew', status: 'Accounter', location:{city:'Borisov', country:'Belarus'}},
+    // {id: 1, followed: false, fullName: 'Dmitry', status: 'Director', location:{city:'Minsk', country:'Belarus'}},
+    // {id: 2, followed: true, fullName: 'George', status: 'Engineer', location:{city:'Minsk', country:'Belarus'}},
+    // {id: 3, followed: false, fullName: 'Andrew', status: 'Accounter', location:{city:'Borisov', country:'Belarus'}},
 ],
 }
 
