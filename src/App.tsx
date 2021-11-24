@@ -44,7 +44,10 @@ function App(props:PropsAppType) {
                     post={props.post}
                     //dispatch={props.dispatch}
                     newPostText={props.newPostText}/>} />
-                <Route path={'/users'} render={()=> <UsersConteiner users={props.store.usersPage.users}/>} />
+                <Route path={'/users'} render={()=> <UsersConteiner users={props.store.usersPage.users}
+                                                                    totalCount={props.store.usersPage.totalCount}
+                                                                    currentPage={props.store.usersPage.currentPage}
+                                                                    pageSize={props.store.usersPage.pageSize}/>} />
 
             </div>
         </div>

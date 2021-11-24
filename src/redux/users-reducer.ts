@@ -1,6 +1,8 @@
 import * as url from "url";
 
 const SET_USERS = 'SET_USERS'
+const SET_TOTAL_PAGE = 'SET_TOTAL_PAGE'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 
@@ -10,7 +12,9 @@ export type TypeUsers = {
 
 export type TypeUsersPage = {
     users: Array<TypeUsers>
-
+    pageSize: number
+    totalCount:number
+    currentPage:number
 }
 let initialState: TypeUsersPage ={
     users: [
@@ -18,9 +22,13 @@ let initialState: TypeUsersPage ={
     // {id: 2, followed: true, fullName: 'George', status: 'Engineer', location:{city:'Minsk', country:'Belarus'}},
     // {id: 3, followed: false, fullName: 'Andrew', status: 'Accounter', location:{city:'Borisov', country:'Belarus'}},
 ],
+    pageSize:5,
+    totalCount:50,
+    currentPage:1
 }
 
-export const usersReducer = (state: TypeUsersPage = initialState, action: {type:string, userId:number, users:Array<TypeUsers>}) => {
+export const usersReducer = (state: TypeUsersPage = initialState, action: {type:string, currentPage:number, totalCount:number,
+    userId:number, users:Array<TypeUsers>}) => {
     switch (action.type) {
         case FOLLOW:
             return {...state, users: state.users.map(t=>{
@@ -37,7 +45,13 @@ export const usersReducer = (state: TypeUsersPage = initialState, action: {type:
                     return t
                 })}
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [ ...action.users]}
+
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage:action.currentPage}
+
+        case SET_TOTAL_PAGE:
+            return {...state, totalCount:action.totalCount}
         default:
             return state
     }
@@ -50,6 +64,15 @@ export type FollowACType = {
 export type SetUserACType = {
     type:string
     users:Array<TypeUsers>
+}
+
+export type SetCurrentPageACType = {
+    type:string
+    currentPage:number
+}
+export type SetTotalUserPageACType = {
+    type:string
+    totalCount:number
 }
 
 export let followActionCreator = (userId:number) =>{
@@ -72,5 +95,16 @@ export const setUsersActionCreator = (users:Array<TypeUsers>) =>{
         users
     }
 }
-
+export const setCurrentPageActionCreator = (currentPage:number) =>{
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    }
+}
+export const setTotalUserPageActionCreator = (totalPage:number) =>{
+    return {
+        type: SET_TOTAL_PAGE,
+        totalCount: totalPage
+    }
+}
 
