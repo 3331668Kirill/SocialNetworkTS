@@ -8,7 +8,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
 import {ActionType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/dialogsContainer";
-import {Users} from "./components/Users/Users";
 import UsersConteiner from "./components/Users/UsersConteiner";
 import {AppStateType} from "./redux/redux-store";
 
@@ -46,6 +45,7 @@ function App(props:PropsAppType) {
                     newPostText={props.newPostText}/>} />
                 <Route path={'/users'} render={()=> <UsersConteiner users={props.store.usersPage.users}
                                                                     totalCount={props.store.usersPage.totalCount}
+                                                                    isFetching={props.store.usersPage.isFetching}
                                                                     currentPage={props.store.usersPage.currentPage}
                                                                     pageSize={props.store.usersPage.pageSize}/>} />
 

@@ -5,7 +5,7 @@ import {
     followActionCreator,
     FollowACType,
     setCurrentPageActionCreator,
-    SetCurrentPageACType,
+    SetCurrentPageACType, setIsFetchingActionCreator, SetIsFetchingACType,
     setTotalUserPageActionCreator,
     SetTotalUserPageACType,
     SetUserACType,
@@ -21,6 +21,7 @@ type MapStateToPropsType = {
     pageSize:number
     totalCount:number
     currentPage:number
+    isFetching:boolean
 }
 
 const mapStateToProps:any = (state:AppStateType):MapStateToPropsType =>{
@@ -28,11 +29,13 @@ const mapStateToProps:any = (state:AppStateType):MapStateToPropsType =>{
         users:state.usersPage.users,
         pageSize:state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
-        currentPage:state.usersPage.currentPage
+        currentPage:state.usersPage.currentPage,
+        isFetching:state.usersPage.isFetching
     }
 
 }
-const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType | SetCurrentPageACType | SetTotalUserPageACType) => void) =>{
+const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType
+    | SetCurrentPageACType | SetTotalUserPageACType | SetIsFetchingACType) => void) =>{
     return {
         follow:(userId:number)=>{
             dispatch(followActionCreator(userId))
@@ -48,7 +51,11 @@ const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType | Set
         },
         setTotalUserPage: (totalPage:number) =>{
             dispatch(setTotalUserPageActionCreator(totalPage))
+        },
+        setIsFetching: (isFetching:boolean) =>{
+            dispatch(setIsFetchingActionCreator(isFetching))
         }
+
 
     }
 }
