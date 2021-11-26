@@ -10,12 +10,15 @@ import {ActionType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/dialogsContainer";
 import UsersConteiner from "./components/Users/UsersConteiner";
 import {AppStateType} from "./redux/redux-store";
+import ProfileContainer from "./components/Profile/profileContainer";
+import {ProfileServerType} from "./redux/profile-reducer";
 
 
 
 type PropsAppType = {
     post:Array<PropsPostType>
     d:Array<PropsDialogItem>
+    profile:ProfileServerType
     m:Array<{ id: number, message: string }>
     b: string
     dispatch:(action:ActionType)=>void
@@ -25,7 +28,7 @@ type PropsAppType = {
 
 function App(props:PropsAppType) {
 
-    console.log(props.b)
+    console.log(props.store.profilePage.profile)
     return (
         <BrowserRouter>
         <div className="App">
@@ -39,8 +42,9 @@ function App(props:PropsAppType) {
                         d={props.d}
                         m={props.m}/>} />
                 <Route path='/profile' render={
-                    ()=><Profile
+                    ()=><ProfileContainer
                     post={props.post}
+                    profile={props.profile}
                     //dispatch={props.dispatch}
                     newPostText={props.newPostText}/>} />
                 <Route path={'/users'} render={()=> <UsersConteiner users={props.store.usersPage.users}

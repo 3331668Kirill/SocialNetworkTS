@@ -2,11 +2,35 @@ import {ActionType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+export type ProfileServerType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
+}
+
 
 type TypeProfilePage = {
     posts: Array<{ id: number, message: string, likesCount: number }>
     newPostText: string
     dialogs: Array<{ id: number, name: string }>
+    profile:ProfileServerType
 }
 let initialState ={ posts: [
     {id: 1, message: 'Hello bro', likesCount: 12},
@@ -23,10 +47,11 @@ let initialState ={ posts: [
     {id: 4, name: 'Patrick'},
     {id: 5, name: 'Vova'}
 ],
+    profile: null
 }
 
 
-export const profileReducer = (state: TypeProfilePage = initialState, action: ActionType) => {
+export const profileReducer = (state: TypeProfilePage&any = initialState, action: ActionType & {profile:ProfileServerType}) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -36,18 +61,18 @@ export const profileReducer = (state: TypeProfilePage = initialState, action: Ac
             }
             state = {...state, posts:[...state.posts, newPost], newPostText:''}  //state.posts.push(newPost)
 
-            //state.newPostText = ''
+
             return state
         case UPDATE_NEW_POST:
         state = {...state, newPostText:action.newText}
-            //state.newPostText = action.newText
+
             return state
+        case SET_USER_PROFILE:
+            console.log(action.profile)
+            return {...state,profile:action.profile}
         default:
             return state
     }
-
-
-
 }
 
 export let addPostActionCreator = (text:string) =>{
@@ -65,4 +90,10 @@ export let updateNewPostTextActionCreator = (text:string) =>{
     }
 }
 
+export let setUserProfileAC = (profile:ProfileServerType) =>{
 
+    return {
+        type: SET_USER_PROFILE,
+        profile
+    }
+}

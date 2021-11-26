@@ -8,12 +8,13 @@ import {
     SetCurrentPageACType, setIsFetchingActionCreator, SetIsFetchingACType,
     setTotalUserPageActionCreator,
     SetTotalUserPageACType,
-    SetUserACType,
+    SetUserACType, setUserProfileACType,
     setUsersActionCreator,
     TypeUsers,
     unFollowActionCreator
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
+import {ProfileServerType, setUserProfileAC} from "../../redux/profile-reducer";
 
 
 type MapStateToPropsType = {
@@ -35,7 +36,7 @@ const mapStateToProps:any = (state:AppStateType):MapStateToPropsType =>{
 
 }
 const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType
-    | SetCurrentPageACType | SetTotalUserPageACType | SetIsFetchingACType) => void) =>{
+    | SetCurrentPageACType | SetTotalUserPageACType | SetIsFetchingACType | setUserProfileACType) => void) =>{
     return {
         follow:(userId:number)=>{
             dispatch(followActionCreator(userId))
@@ -54,6 +55,9 @@ const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType
         },
         setIsFetching: (isFetching:boolean) =>{
             dispatch(setIsFetchingActionCreator(isFetching))
+        },
+        setUserProfileAC: (profile: ProfileServerType) => {
+            dispatch(setUserProfileAC(profile))
         }
 
 

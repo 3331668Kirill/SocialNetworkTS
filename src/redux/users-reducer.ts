@@ -1,4 +1,5 @@
 import * as url from "url";
+import {ProfileServerType} from "./profile-reducer";
 
 const SET_USERS = 'SET_USERS'
 const SET_TOTAL_PAGE = 'SET_TOTAL_PAGE'
@@ -82,6 +83,10 @@ export type SetTotalUserPageACType = {
 export type SetIsFetchingACType = {
     type:string
     isFetching:boolean
+}
+export type setUserProfileACType = {
+    type:string
+    profile:ProfileServerType
 }
 export let followActionCreator = (userId:number) =>{
 

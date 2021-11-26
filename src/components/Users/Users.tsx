@@ -2,6 +2,7 @@ import React from "react";
 import {TypeUsers} from "../../redux/users-reducer";
 import axios from "axios";
 import {Preloader} from "../common/Preloader";
+import { NavLink } from "react-router-dom";
 
 
 type UsersTypeProps = {
@@ -11,6 +12,7 @@ type UsersTypeProps = {
     setCurrentPage: (currentPage: number) => void
     setTotalUserPage: (totalPage: number) => void
     setIsFetching: (isFetching: boolean) => void
+    setUserProfileAC: (profile: any) => void
     users: Array<TypeUsers>
     pageSize: number
     totalCount: number
@@ -47,6 +49,12 @@ export class Users extends React.Component<UsersTypeProps> {
                 this.props.setUsers(responce.data.items)
             })
     }
+    onChangeProfile = (t:number)=>{
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${t}`)
+            .then(responce => {
+                this.props.setUserProfileAC(responce.data)
+            })
+    }
 
     render() {
         const pagesCount: number = Math.ceil(this.props.totalCount / this.props.pageSize)
@@ -66,8 +74,10 @@ export class Users extends React.Component<UsersTypeProps> {
                 {this.props.users.map(t => <div key={t.id}>{t.name}
                     <span>
                 <div>
+                    <NavLink to={'/profile/' + t.id} onClick={()=>this.onChangeProfile(t.id)}>
                     <img
                         src={t.photos.small ? t.photos.small : 'https://www.meme-arsenal.com/memes/87d4bfeed251dba0ce946e9e594dbdb6.jpg'}/>
+                    </NavLink>
                 </div>
                 <div>
                     {t.followed

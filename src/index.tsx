@@ -17,6 +17,7 @@ import {Provider} from "react-redux";
         <App
             post={store.getState().profilePage.posts}
              d={store.getState().profilePage.dialogs}
+            profile={store.getState().profilePage.profile}
              m={store.getState().messagePage.messages}
              b={store.getState().messagePage.newMessageBody}
              newPostText={store.getState().profilePage.newPostText}
