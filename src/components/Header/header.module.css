@@ -15,3 +15,8 @@
     width: 150px;
     height: 100px;
 }
+.login{
+    float: right;
+    font-size: 30px;
+    color: yellow;
+}

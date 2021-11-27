@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/header";
 import Navbar from "./components/Navbar/navbar";
-import Profile from "./components/Profile/profile";
 import {PropsDialogItem} from "./components/Dialogs/dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {PropsPostType} from "./components/Profile/MyPosts/Post/Post";
@@ -12,6 +10,7 @@ import UsersConteiner from "./components/Users/UsersConteiner";
 import {AppStateType} from "./redux/redux-store";
 import ProfileContainer from "./components/Profile/profileContainer";
 import {ProfileServerType} from "./redux/profile-reducer";
+import HeaderContainer from "./components/Header/headerContainer";
 
 
 
@@ -32,7 +31,7 @@ function App(props:PropsAppType) {
     return (
         <BrowserRouter>
         <div className="App">
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className='App_content'>
                 <Route path='/messages' render={

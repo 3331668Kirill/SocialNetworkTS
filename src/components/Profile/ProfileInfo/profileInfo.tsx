@@ -17,7 +17,7 @@ const ProfileInfo = (props:{profile:ProfileServerType}) => {
             <img className={s.img}
                 src={props.profile.photos.small
                     ? props.profile.photos.small
-                    :'https://static4.depositphotos.com/1000423/454/i/600/depositphotos_4548401-stock-photo-symbol-of-yin-and-yang.jpg'}/>
+                    :'https://igel.com.ua/image/cachecatalog/NASIPNYE/%D1%84%D0%BE%D1%82%D0%BE-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE-%D0%BE%D1%82%D1%81%D1%83%D1%82%D1%81%D1%82%D0%B2%D1%83%D0%B5%D1%82-3000x3000.jpg'}/>
             <div className={s.description}>
 
             </div>

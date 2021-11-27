@@ -17,12 +17,12 @@ type ProfileType = {
 class ProfileContainer extends React.Component<ProfileType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile`)
-            .then(responce => {
-
-                this.props.setUserProfileAC(responce.data)
-
-            })
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile`)
+        //     .then(responce => {
+        //
+        //         this.props.setUserProfileAC(responce.data)
+        //
+        //     })
     }
 
 
