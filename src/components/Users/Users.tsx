@@ -1,9 +1,8 @@
 import React from "react";
 import {TypeUsers} from "../../redux/users-reducer";
-import axios from "axios";
 import {Preloader} from "../common/Preloader";
 import { NavLink } from "react-router-dom";
-
+import {followChange, getProfile, getUsers, unFollowChange} from "../common/api";
 
 type UsersTypeProps = {
     follow: (userId: number) => void
@@ -20,40 +19,49 @@ type UsersTypeProps = {
     isFetching: boolean
 }
 
-
 export class Users extends React.Component<UsersTypeProps> {
 
     constructor(props: any) {
         super(props);
-
-
-    }
+   }
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(responce => {
+        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                 this.props.setIsFetching(false)
-                this.props.setUsers(responce.data.items)
-                this.props.setTotalUserPage(responce.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUserPage(data.totalCount)
             })
     }
 
     onChangePage = (t: number) => {
         this.props.setCurrentPage(t)
         this.props.setIsFetching(true)
-        axios.get
-        (`https://social-network.samuraijs.com/api/1.0/users?page=${t}&count=${this.props.pageSize}`)
-            .then(responce => {
+        getUsers(t, this.props.pageSize).then(data => {
                 this.props.setIsFetching(false)
-                this.props.setUsers(responce.data.items)
+                this.props.setUsers(data.items)
             })
     }
     onChangeProfile = (t:number)=>{
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${t}`)
-            .then(responce => {
-                this.props.setUserProfileAC(responce.data)
+        getProfile(t).then(data => {
+                this.props.setUserProfileAC(data)
             })
+    }
+    unFollowChange = (id:number) =>{
+        unFollowChange(id).then(data => {
+                if (data.resultCode === 0){
+                    this.props.unfollow(id)
+                }
+            })
+
+    }
+    followChange = (id:number) =>{
+        followChange(id).then(data => {
+                if (data.resultCode === 0){
+                    this.props.follow(id)
+                }
+            })
+
     }
 
     render() {
@@ -81,8 +89,8 @@ export class Users extends React.Component<UsersTypeProps> {
                 </div>
                 <div>
                     {t.followed
-                        ? <button onClick={() => this.props.unfollow(t.id)}>Unfollow</button>
-                        : <button onClick={() => this.props.follow(t.id)}>Follow</button>}
+                        ? <button onClick={() => this.unFollowChange(t.id)}>Unfollow</button>
+                        : <button onClick={() => this.followChange(t.id)}>Follow</button>}
 
                 </div>
             </span>

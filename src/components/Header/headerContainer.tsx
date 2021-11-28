@@ -1,25 +1,21 @@
 import React from "react";
 import s from './header.module.css'
-import Header from "./header";
-import axios from "axios";
+import Header, {HeaderPropsType} from "./header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {setAuthUserDataAC} from "../../redux/auth-reducer";
+import {authMe} from "../common/api";
 
-
-class HeaderContainer extends React.Component<any, any> {
+class HeaderContainer extends React.Component<HeaderPropsType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then(responce => {
-                if (responce.data.resultCode===0) {
-                    console.log(responce.data.data)
-                    this.props.setAuthUserDataAC(responce.data.data)
+        authMe().then(data => {
+                if (data.resultCode===0) {
+                    console.log(data.data)
+                    this.props.setAuthUserDataAC(data.data)
                 }
             })
     }
-
-
-    render() {
+  render() {
         return (
             <div className={s.header}>
                 <Header {...this.props}/>
@@ -31,7 +27,8 @@ class HeaderContainer extends React.Component<any, any> {
 const mapStateToProps = (state:AppStateType) => {
     return {
         isAuth:state.authPage.data.isAuth,
-        login:state.authPage.data.login
+        login:state.authPage.data.login,
+
     }
 }
 

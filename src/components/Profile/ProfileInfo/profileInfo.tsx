@@ -14,6 +14,7 @@ const ProfileInfo = (props:{profile:ProfileServerType}) => {
             <div>ID: {props.profile?.userId}</div>
             <div>ABOUT ME: {props.profile?.aboutMe}</div>
             <div>FACEBOOK: {props.profile?.contacts?.facebook}</div>
+
             <img className={s.img}
                 src={props.profile.photos.small
                     ? props.profile.photos.small

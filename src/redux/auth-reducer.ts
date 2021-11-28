@@ -10,7 +10,6 @@ export type AuthServerType = {
         login: string
         isAuth: boolean
     }
-
 }
 
 let initialState = {
@@ -22,9 +21,7 @@ let initialState = {
         login: null,
         isAuth: false
     },
-
 }
-
 
 export const authReducer = (state: AuthServerType & any = initialState,
                             action: {type:string,id:number,email:string, login:string, isAuth:boolean} ) => {
