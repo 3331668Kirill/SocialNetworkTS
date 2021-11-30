@@ -1,17 +1,15 @@
 import React from "react";
 import {TypeUsers} from "../../redux/users-reducer";
 import {Preloader} from "../common/Preloader";
-import { NavLink } from "react-router-dom";
-import {followChange, getProfile, getUsers, unFollowChange} from "../common/api";
+import {NavLink} from "react-router-dom";
+
 
 type UsersTypeProps = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: Array<TypeUsers>) => void
+    followTnunk: (userId: number) => void
+    unfollowThunk: (userId: number) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUserPage: (totalPage: number) => void
-    setIsFetching: (isFetching: boolean) => void
-    setUserProfileAC: (profile: any) => void
+    getUserProfile:(userId:number) =>void
+    getUsers: (currentPage: number, pageSize: number) => void
     users: Array<TypeUsers>
     pageSize: number
     totalCount: number
@@ -23,44 +21,29 @@ export class Users extends React.Component<UsersTypeProps> {
 
     constructor(props: any) {
         super(props);
-   }
+    }
 
     componentDidMount() {
-        this.props.setIsFetching(true)
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUserPage(data.totalCount)
-            })
+
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+
     }
 
     onChangePage = (t: number) => {
         this.props.setCurrentPage(t)
-        this.props.setIsFetching(true)
-        getUsers(t, this.props.pageSize).then(data => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(data.items)
-            })
-    }
-    onChangeProfile = (t:number)=>{
-        getProfile(t).then(data => {
-                this.props.setUserProfileAC(data)
-            })
-    }
-    unFollowChange = (id:number) =>{
-        unFollowChange(id).then(data => {
-                if (data.resultCode === 0){
-                    this.props.unfollow(id)
-                }
-            })
+        this.props.getUsers(t, this.props.pageSize)
+
 
     }
-    followChange = (id:number) =>{
-        followChange(id).then(data => {
-                if (data.resultCode === 0){
-                    this.props.follow(id)
-                }
-            })
+    onChangeProfile = (t: number) => {
+        this.props.getUserProfile(t)
+
+    }
+    unFollowChange = (id: number) => {
+        this.props.unfollowThunk(id)
+    }
+    followChange = (id: number) => {
+        this.props.followTnunk(id)
 
     }
 
@@ -82,15 +65,17 @@ export class Users extends React.Component<UsersTypeProps> {
                 {this.props.users.map(t => <div key={t.id}>{t.name}
                     <span>
                 <div>
-                    <NavLink to={'/profile/' + t.id} onClick={()=>this.onChangeProfile(t.id)}>
+                    <NavLink to={'/profile/' + t.id} onClick={() => this.onChangeProfile(t.id)}>
                     <img
                         src={t.photos.small ? t.photos.small : 'https://www.meme-arsenal.com/memes/87d4bfeed251dba0ce946e9e594dbdb6.jpg'}/>
                     </NavLink>
                 </div>
                 <div>
                     {t.followed
-                        ? <button onClick={() => this.unFollowChange(t.id)}>Unfollow</button>
-                        : <button onClick={() => this.followChange(t.id)}>Follow</button>}
+                        ? <button disabled={this.props.isFetching}
+                                  onClick={() => this.unFollowChange(t.id)}>Unfollow</button>
+                        : <button disabled={this.props.isFetching}
+                                  onClick={() => this.followChange(t.id)}>Follow</button>}
 
                 </div>
             </span>

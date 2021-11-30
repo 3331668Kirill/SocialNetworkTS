@@ -1,68 +1,47 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import {Users} from "./Users";
 import {connect} from "react-redux";
-import {
-    followActionCreator,
-    FollowACType,
-    setCurrentPageActionCreator,
-    SetCurrentPageACType, setIsFetchingActionCreator, SetIsFetchingACType,
-    setTotalUserPageActionCreator,
-    SetTotalUserPageACType,
-    SetUserACType, setUserProfileACType,
-    setUsersActionCreator,
-    TypeUsers,
-    unFollowActionCreator
-} from "../../redux/users-reducer";
+import { ActionTypes, followTnunk, getUsersThunkCreator,  setCurrentPageActionCreator,
+   TypeUsers, unFollowTnunk} from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {ProfileServerType, setUserProfileAC} from "../../redux/profile-reducer";
-
+import {getUserProfile} from "../../redux/profile-reducer";
 
 type MapStateToPropsType = {
-    users:Array<TypeUsers>
-    pageSize:number
-    totalCount:number
-    currentPage:number
-    isFetching:boolean
+    users: Array<TypeUsers>
+    pageSize: number
+    totalCount: number
+    currentPage: number
+    isFetching: boolean
 }
-
-const mapStateToProps:any = (state:AppStateType):MapStateToPropsType =>{
+const mapStateToProps: any = (state: AppStateType): MapStateToPropsType => {
     return {
-        users:state.usersPage.users,
-        pageSize:state.usersPage.pageSize,
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
-        currentPage:state.usersPage.currentPage,
-        isFetching:state.usersPage.isFetching
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
-
 }
-const mapDispatchToProps = (dispatch:(action: FollowACType | SetUserACType
-    | SetCurrentPageACType | SetTotalUserPageACType | SetIsFetchingACType | setUserProfileACType) => void) =>{
+const mapDispatchToProps = (dispatch: (action: ActionTypes
+    | any) => void) => {
     return {
-        follow:(userId:number)=>{
-            dispatch(followActionCreator(userId))
+        followTnunk: (userId: number) => {
+            dispatch(followTnunk(userId))
         },
-        unfollow:(userId:number)=>{
-           dispatch(unFollowActionCreator(userId))
+        unfollowThunk: (userId: number) => {
+            dispatch(unFollowTnunk(userId))
         },
-        setUsers:(users:Array<TypeUsers>)=>{
-            dispatch(setUsersActionCreator(users))
-        },
-        setCurrentPage: (currentPage:number) =>{
+
+        setCurrentPage: (currentPage: number) => {
             dispatch(setCurrentPageActionCreator(currentPage))
         },
-        setTotalUserPage: (totalPage:number) =>{
-            dispatch(setTotalUserPageActionCreator(totalPage))
-        },
-        setIsFetching: (isFetching:boolean) =>{
-            dispatch(setIsFetchingActionCreator(isFetching))
-        },
-        setUserProfileAC: (profile: ProfileServerType) => {
-            dispatch(setUserProfileAC(profile))
-        }
 
+        getUserProfile: (userId: number) => dispatch(getUserProfile(userId)),
+        getUsers: (currentPage: number, pageSize: number) => {
+            dispatch(getUsersThunkCreator(currentPage, pageSize))
+        }
 
     }
 }
 
-
-export default connect (mapStateToProps,mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

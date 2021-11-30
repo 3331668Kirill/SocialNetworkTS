@@ -5,13 +5,10 @@ import {PropsPostType} from "./MyPosts/Post/Post";
 import MyPostsConteiner from "./MyPosts/MyPostsConteiner";
 import {ProfileServerType} from "../../redux/profile-reducer";
 
-
-
 const Profile = (props: { post: Array<PropsPostType>,
 
     newPostText:string
     profile:ProfileServerType
-    //dispatch:(action:ActionType)=>void
 
 }) => {if (!props.profile){
     return <ProfileInfo profile={props.profile}/>

@@ -1,3 +1,5 @@
+import {authMe} from "../components/common/api";
+import {Dispatch} from "react";
 
 const SET_IS_AUTH = 'SET_IS_AUTH';
 
@@ -53,6 +55,13 @@ export let setAuthUserDataAC = (state:{id: number, login: string, email: string}
         email: state.email,
         login: state.login,
         isAuth:true
-
     }
+}
+
+export const getAuthUserData = () => (dispatch:Dispatch<{id: number, login: string, email: string}>)=>{
+    authMe().then(data => {
+        if (data.resultCode===0) {
+            dispatch(setAuthUserDataAC(data.data))
+        }
+    })
 }

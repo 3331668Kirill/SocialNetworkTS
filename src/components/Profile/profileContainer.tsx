@@ -3,18 +3,17 @@ import s from './profile.module.css'
 import {PropsPostType} from "./MyPosts/Post/Post";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import {ProfileServerType, setUserProfileAC} from "../../redux/profile-reducer";
+import {getUserProfile, ProfileServerType} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
 
 type ProfileType = {
     post: Array<PropsPostType>
     newPostText: string
     profile: ProfileServerType
-    setUserProfileAC: (profile: ProfileServerType) => void
+    getUserProfile:(userId:number) =>void
 }
 
 class ProfileContainer extends React.Component<ProfileType> {
-
 
    render() {
         console.log(this.props.profile)
@@ -32,5 +31,4 @@ const mapStateToProps: any = (state: AppStateType) => {
     }
 }
 
-
-export default connect(mapStateToProps, {setUserProfileAC})(ProfileContainer)
+export default connect(mapStateToProps, {getUserProfile})(ProfileContainer)

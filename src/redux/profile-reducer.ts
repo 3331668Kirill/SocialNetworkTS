@@ -1,4 +1,6 @@
 import {ActionType} from "./store";
+import {getProfile} from "../components/common/api";
+import {Dispatch} from "react";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
@@ -96,4 +98,10 @@ export let setUserProfileAC = (profile:ProfileServerType) =>{
         type: SET_USER_PROFILE,
         profile
     }
+}
+
+export let getUserProfile = (userId:number) => (dispatch:Dispatch<{ type:string, profile:ProfileServerType }>)=>{
+    getProfile(userId).then(data => {
+        dispatch(setUserProfileAC(data))
+    })
 }
