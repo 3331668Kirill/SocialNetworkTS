@@ -3,6 +3,7 @@ import s from './dialogs.module.css'
 import DialogItem from "./DialogItem/dialogItem";
 import Message from "./Message/message";
 import { StoreContext } from '../../storeContext';
+import {Redirect} from "react-router-dom";
 
 
 
@@ -14,6 +15,7 @@ export type PropsDialogsType = {
     d: Array<PropsDialogItem>
     m: Array<{ id: number, message: string }>
     b:string
+    auth?:boolean
     supermessage?:string
     onNewMessageChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
     onSendMessageClick:() => void
@@ -33,6 +35,7 @@ const Dialogs = (props: PropsDialogsType) => {
     const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>)=>{
         props.onNewMessageChange(e)
     }
+
     return (
         <div className={s.dialogs}>
 

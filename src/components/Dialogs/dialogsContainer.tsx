@@ -1,25 +1,22 @@
 import React, {ChangeEvent} from 'react'
-import {ActionType, StateType} from "../../redux/store";
+import {ActionType} from "../../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialog-reducer";
-import Dialogs, {PropsDialogItem} from "./dialogs";
+import Dialogs from "./dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
+import {WithAuthRedirect} from "../hoc/withAuthRedirect";
 
-// type MapStateToPropsType = {
-//     d:Array<PropsDialogItem>
-//     m:Array<{ id:number, message:string }>
-//     b:string
-//     supermessage:string
-// }
 
 let text= 'HHHHHH'
 
 const mapStateToProps:any = (state:AppStateType) =>{
-    console.log(state)
+    console.log(state.authPage)
     return {
         d:state.profilePage.dialogs,
         m:state.messagePage.messages,
         b:state.messagePage.newMessageBody,
+        auth:state.authPage.data.isAuth,
        supermessage: text      // можно добавить и св-во дополнительно попадет в пропсы Dialogs
     }
 }
@@ -37,5 +34,7 @@ const mapDispatchToProps = (dispatch:(action: ActionType) => void) =>{
         }
     }
 }
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+
+
+const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(WithAuthRedirect (Dialogs))
 export default DialogsContainer

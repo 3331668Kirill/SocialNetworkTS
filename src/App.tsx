@@ -11,6 +11,7 @@ import {AppStateType} from "./redux/redux-store";
 import ProfileContainer from "./components/Profile/profileContainer";
 import {ProfileServerType} from "./redux/profile-reducer";
 import HeaderContainer from "./components/Header/headerContainer";
+import {Login} from "./components/login/login";
 
 
 
@@ -37,7 +38,6 @@ function App(props:PropsAppType) {
                 <Route path='/messages' render={
                     ()=><DialogsContainer
                         b={props.b}
-                        // dispatch={props.dispatch}
                         d={props.d}
                         m={props.m}/>} />
                 <Route path='/profile' render={
@@ -51,6 +51,7 @@ function App(props:PropsAppType) {
                                                                     isFetching={props.store.usersPage.isFetching}
                                                                     currentPage={props.store.usersPage.currentPage}
                                                                     pageSize={props.store.usersPage.pageSize}/>} />
+                <Route path={'/login'} render={()=> <Login/>}/>
 
             </div>
         </div>
