@@ -17,6 +17,14 @@ export const getProfile = (profileNumber:number) =>{
     return axiosInstance.get(`profile/${profileNumber}`)
         .then(responce => responce.data)
 }
+export const getProfileStatus = (profileNumber:number) =>{
+    return axiosInstance.get(`profile/status/${profileNumber}`)
+        .then(responce => responce.data)
+}
+export const setProfileStatusOnServer = (status:string) =>{
+    return axiosInstance.put(`profile/status`, {status:status})
+        .then(responce => responce.data)
+}
 
 export  const unFollowChange = (id:number) =>{
     return axiosInstance.delete(`follow/${id}`)

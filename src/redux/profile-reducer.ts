@@ -1,10 +1,12 @@
 import {ActionType} from "./store";
-import {getProfile} from "../components/common/api";
+import {getProfile, getProfileStatus, setProfileStatusOnServer} from "../components/common/api";
 import {Dispatch} from "react";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
+const SET_USER_PROFILE_STATUS_ON_SERVER = 'SET_USER_PROFILE_STATUS_ON_SERVER';
 export type ProfileServerType = {
     aboutMe: string
     contacts: {
@@ -33,6 +35,8 @@ type TypeProfilePage = {
     newPostText: string
     dialogs: Array<{ id: number, name: string }>
     profile:ProfileServerType
+    profileStatus:string
+    status:string
 }
 let initialState ={ posts: [
     {id: 1, message: 'Hello bro', likesCount: 12},
@@ -49,11 +53,14 @@ let initialState ={ posts: [
     {id: 4, name: 'Patrick'},
     {id: 5, name: 'Vova'}
 ],
-    profile: null
+    profile: null,
+    profileStatus:'',
+    status:''
 }
 
 
-export const profileReducer = (state: TypeProfilePage&any = initialState, action: ActionType & {profile:ProfileServerType}) => {
+export const profileReducer = (state: TypeProfilePage&any = initialState,
+                               action: ActionType & {profile:ProfileServerType, profileStatus:string, status:string}) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -70,8 +77,14 @@ export const profileReducer = (state: TypeProfilePage&any = initialState, action
 
             return state
         case SET_USER_PROFILE:
-            console.log(action.profile)
+
             return {...state,profile:action.profile}
+        case SET_USER_PROFILE_STATUS:
+
+            return {...state,profileStatus:action.profileStatus}
+        case SET_USER_PROFILE_STATUS_ON_SERVER:
+
+            return {...state,profileStatus:action.status}
         default:
             return state
     }
@@ -99,9 +112,34 @@ export let setUserProfileAC = (profile:ProfileServerType) =>{
         profile
     }
 }
+export let setUserProfileStatusAC = (profileStatus:string) =>{
 
+    return {
+        type: SET_USER_PROFILE_STATUS,
+        profileStatus
+    }
+}
+export let setProfileStatusOnServerAC = (status:string) =>{
+
+    return {
+        type: SET_USER_PROFILE_STATUS_ON_SERVER,
+        status
+    }
+}
 export let getUserProfile = (userId:number) => (dispatch:Dispatch<{ type:string, profile:ProfileServerType }>)=>{
     getProfile(userId).then(data => {
         dispatch(setUserProfileAC(data))
+    })
+}
+export let getUserProfileStatus = (userId:number) => (dispatch:Dispatch<{ type:string, profileStatus:string }>)=>{
+    getProfileStatus(userId).then(data => {
+        dispatch(setUserProfileStatusAC(data))
+    })
+}
+export let setProfileStatus = (status:string) => (dispatch:Dispatch<{ type:string, status:string }>)=>{
+    setProfileStatusOnServer(status).then(data => {
+        if (data.resultCode===0){
+        dispatch(setProfileStatusOnServerAC(status))
+        }
     })
 }

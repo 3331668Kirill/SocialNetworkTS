@@ -3,16 +3,19 @@ import s from './profile.module.css'
 import {PropsPostType} from "./MyPosts/Post/Post";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import {getUserProfile, ProfileServerType} from "../../redux/profile-reducer";
+import {getUserProfile, getUserProfileStatus, ProfileServerType, setProfileStatus} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Redirect} from "react-router-dom";
 import {WithAuthRedirect} from "../hoc/withAuthRedirect";
 
 type ProfileType = {
     post: Array<PropsPostType>
     newPostText: string
     profile: ProfileServerType
+    profileStatus:string
+    status:string
     getUserProfile:(userId:number) =>void
+    getUserProfileStatus:(userId:number) =>void
+    setProfileStatus:(status:string) =>void
 }
 
 class ProfileContainer extends React.Component<ProfileType> {
@@ -32,8 +35,9 @@ const mapStateToProps: any = (state: AppStateType) => {
     console.log (state)
     return {
         profile: state.profilePage.profile,
+        profileStatus: state.profilePage.profileStatus,
         auth: state.authPage.data.isAuth
     }
 }
 
-export default connect(mapStateToProps, {getUserProfile})(WithAuthRedirect(ProfileContainer))
+export default connect(mapStateToProps, {getUserProfile, getUserProfileStatus, setProfileStatus})(WithAuthRedirect(ProfileContainer))
