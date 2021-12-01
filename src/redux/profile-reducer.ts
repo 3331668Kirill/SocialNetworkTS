@@ -84,7 +84,7 @@ export const profileReducer = (state: TypeProfilePage&any = initialState,
             return {...state,profileStatus:action.profileStatus}
         case SET_USER_PROFILE_STATUS_ON_SERVER:
 
-            return {...state,profileStatus:action.status}
+            return {...state,status:action.status}
         default:
             return state
     }

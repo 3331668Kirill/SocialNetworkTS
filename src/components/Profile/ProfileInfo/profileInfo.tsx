@@ -9,9 +9,9 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
     getUserProfileStatus:(userId:number)=>void,
     setProfileStatus:(status:string) =>void}) => {
 
-    props.getUserProfileStatus(21041)
-    console.log(props.profileStatus)
-    const [status, setStatus] = useState<string>(props.profileStatus)
+    props.getUserProfileStatus(props.profile?.userId)
+
+    const [status, setStatus] = useState<string>(props.status)
     const [editMode, setEditMode] = useState<boolean>(false)
 
     if (!props.profile){
@@ -37,6 +37,7 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
             <div>ID: {props.profile?.userId}</div>
             <div>ABOUT ME: {props.profile?.aboutMe}</div>
             <div>FACEBOOK: {props.profile?.contacts?.facebook}</div>
+            <div>STATUS: {props.profileStatus}</div>
 
 
 

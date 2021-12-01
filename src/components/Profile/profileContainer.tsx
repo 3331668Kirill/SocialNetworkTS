@@ -21,7 +21,7 @@ type ProfileType = {
 class ProfileContainer extends React.Component<ProfileType> {
 
    render() {
-        console.log(this.props.profile)
+        console.log(this.props.status)
 
         return (
             <div className={s.content}>
@@ -32,11 +32,13 @@ class ProfileContainer extends React.Component<ProfileType> {
 }
 
 const mapStateToProps: any = (state: AppStateType) => {
-    console.log (state)
+
     return {
         profile: state.profilePage.profile,
         profileStatus: state.profilePage.profileStatus,
+        status: state.profilePage.status,
         auth: state.authPage.data.isAuth
+
     }
 }
 
