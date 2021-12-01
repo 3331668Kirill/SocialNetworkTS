@@ -1,12 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './profileInfo.module.css'
 import {ProfileServerType} from "../../../redux/profile-reducer";
 import {Preloader} from "../../common/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props:{profile:ProfileServerType}) => {
+    const [status, setStatus] = useState<string>("Free")
+    const [editMode, setEditMode] = useState<boolean>(false)
+
     if (!props.profile){
         return <Preloader isFetching={true}/>
+    }
+    const onSetStatus = (e:string) => {
+      setStatus(e)
+     }
+    const setEditModeCB = (e:boolean) => {
+        setEditMode(e)
     }
     return (
         <div className={s.content}>
@@ -14,7 +24,7 @@ const ProfileInfo = (props:{profile:ProfileServerType}) => {
             <div>ID: {props.profile?.userId}</div>
             <div>ABOUT ME: {props.profile?.aboutMe}</div>
             <div>FACEBOOK: {props.profile?.contacts?.facebook}</div>
-
+            <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
             <img className={s.img}
                 src={props.profile.photos.small
                     ? props.profile.photos.small
