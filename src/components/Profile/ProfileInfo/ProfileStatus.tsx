@@ -9,7 +9,7 @@ const ProfileStatus = (props:{status:string, editMode:boolean, setStatus:(e:any)
     return (<>
             {!props.editMode &&
         <div >
-            <span onDoubleClick={()=>props.setEditMode(true)}>MY STATUS:{props.status}</span>
+            <span onDoubleClick={()=>props.setEditMode(true)}>MY STATUS:{localStorage.getItem('status')}</span>
 
         </div>
             }
