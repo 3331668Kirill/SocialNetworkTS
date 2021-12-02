@@ -3,12 +3,12 @@ import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
 
 
-
+type TextType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null
 
 const MyPosts = (props: {
     post: Array<PropsPostType>,
-    updateNewPostText:(text:'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null)=>void
-    addPost:(text:'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null)=>void
+    updateNewPostText:(text:TextType)=>void
+    addPost:(text:TextType)=>void
     newPostText: string
 
 
@@ -19,15 +19,14 @@ const MyPosts = (props: {
 
     let newPostElement: RefObject<any> = React.createRef()
     let addPost = () => {
-        let text: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null = newPostElement.current.value
+        let text = newPostElement.current.value
         if (text) {
             props.addPost(text)
-
         }
 
     }
     let onPostChange = () => {
-        let text: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null = newPostElement.current.value
+        let text = newPostElement.current.value
         props.updateNewPostText(text)
 
     }
@@ -38,8 +37,8 @@ const MyPosts = (props: {
                 <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
             </div>
             <div>
-                <button onClick={addPost}>Add post
-                </button>
+                <button onClick={addPost} disabled={!props.newPostText}> Add post </button>
+                {!props.newPostText && <span style={{color:'red'}}>text is required! Enter the text in the field</span>}
             </div>
             <div className={s.postBlock}>My Posts</div>
             <div>
