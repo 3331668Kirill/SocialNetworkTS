@@ -13,6 +13,7 @@ import {ProfileServerType} from "./redux/profile-reducer";
 import HeaderContainer from "./components/Header/headerContainer";
 import {Login} from "./components/login/login";
 import {News} from "./components/News/news";
+import {Settings} from "./components/Settings/Settings";
 
 
 type PropsAppType = {
@@ -53,6 +54,7 @@ function App(props:PropsAppType) {
                                                                     pageSize={props.store.usersPage.pageSize}/>} />
                 <Route path={'/login'} render={()=> <Login/>}/>
                 <Route path={'/news'} render={()=> <News/>}/>
+                <Route path={'/settings'} render={()=> <Settings/>}/>
 
             </div>
         </div>
