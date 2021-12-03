@@ -44,9 +44,6 @@ export const Login = () => {
             authMe().then(data => {
                 console.log(data)
 
-                if (data.resultCode === 0) {
-                    setSt(false)
-                }
                 if (data.data.login === values.loginName && data.data.email === values.email) {
                     setSt(false)
                 }
@@ -56,18 +53,25 @@ export const Login = () => {
         },
 
     });
-    const auth = (e: any) => {
+    const submit = (e: any) => {
         formik.handleSubmit(e)
 
     }
-
+    const isAuth = () => {
+        authMe().then(data => {
+            if (data.resultCode === 0) {
+                setSt(false)
+        }
+    })
+    }
+    isAuth()
     return (
         <div>
             {!st && <Redirect to={'/profile'}/>}
             <h1>Login</h1>
             <Formik
                 initialValues={formik.initialValues}
-                onSubmit={(values) => auth(values)}
+                onSubmit={(values) => submit(values)}
             >
                 <Form>
                     <label htmlFor="loginName">Login Name </label>

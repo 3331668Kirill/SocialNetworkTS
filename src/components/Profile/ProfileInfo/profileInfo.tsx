@@ -14,10 +14,7 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
     const [status, setStatus] = useState<string>(props.status)
     const [editMode, setEditMode] = useState<boolean>(false)
 
-        if (!props.profile){
 
-        return <Preloader isFetching={true}/>
-    }
     const onSetStatus = (e:string) => {
       setStatus(e)
      }
@@ -28,7 +25,11 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
             localStorage.setItem('status', status)
         }
     }
+    if (!props.profile){
 
+        return <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
+        //<Preloader isFetching={true}/>
+    }
 
 
     return (
