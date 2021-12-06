@@ -48,9 +48,15 @@ export class Users extends React.Component<UsersTypeProps> {
     }
 
     render() {
-        const pagesCount: number = Math.ceil(this.props.totalCount / this.props.pageSize)
         const pages = []
-        for (let i = 1; i <= pagesCount / 100; i++) {
+        let start = 1
+        let finish = 10
+        if (this.props.currentPage > start + 5){
+            start = this.props.currentPage - 4
+            finish = this.props.currentPage + 5
+        }
+
+        for (let i = start; i <= finish; i++) {
             pages.push(i)
         }
 
