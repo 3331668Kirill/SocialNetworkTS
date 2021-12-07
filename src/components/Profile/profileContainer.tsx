@@ -3,7 +3,13 @@ import s from './profile.module.css'
 import {PropsPostType} from "./MyPosts/Post/Post";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import {getUserProfile, getUserProfileStatus, ProfileServerType, setProfileStatus} from "../../redux/profile-reducer";
+import {
+    getUserProfile,
+    getUserProfileStatus,
+    ProfileServerType,
+    setPhoto,
+    setProfileStatus
+} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {WithAuthRedirect} from "../hoc/withAuthRedirect";
 
@@ -13,7 +19,9 @@ type ProfileType = {
     profile: ProfileServerType
     profileStatus:string
     status:string
+    photos:any
     getUserProfile:(userId:number) =>void
+    setPhoto:(file:any)=>void
     getUserProfileStatus:(userId:number) =>void
     setProfileStatus:(status:string) =>void
 }
@@ -37,9 +45,11 @@ const mapStateToProps: any = (state: AppStateType) => {
         profile: state.profilePage.profile,
         profileStatus: state.profilePage.profileStatus,
         status: state.profilePage.status,
+        photos:state.profilePage.photos,
         auth: state.authPage.data.isAuth
 
     }
 }
 
-export default connect(mapStateToProps, {getUserProfile, getUserProfileStatus, setProfileStatus})(WithAuthRedirect(ProfileContainer))
+export default connect(mapStateToProps, {getUserProfile, setPhoto,
+    getUserProfileStatus, setProfileStatus})(WithAuthRedirect(ProfileContainer))

@@ -39,3 +39,11 @@ export const authMe = () =>{
     return axiosInstance.get(`auth/me`)
         .then(responce => responce.data)
 }
+
+export const setPhotoOnServer = (file:any) =>{
+    const formData = new FormData()
+    formData.append('image',file)
+    return axiosInstance.put('profile/photo',formData,{
+        headers:{'Content-Type': 'multipart/form-data'}
+    })
+}

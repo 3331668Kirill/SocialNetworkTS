@@ -8,7 +8,7 @@ type UsersTypeProps = {
     followTnunk: (userId: number) => void
     unfollowThunk: (userId: number) => void
     setCurrentPage: (currentPage: number) => void
-    getUserProfile:(userId:number) =>void
+    getUserProfile: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
     users: Array<TypeUsers>
     pageSize: number
@@ -51,7 +51,7 @@ export class Users extends React.Component<UsersTypeProps> {
         const pages = []
         let start = 1
         let finish = 10
-        if (this.props.currentPage > start + 5){
+        if (this.props.currentPage > start + 5) {
             start = this.props.currentPage - 4
             finish = this.props.currentPage + 5
         }
@@ -64,8 +64,11 @@ export class Users extends React.Component<UsersTypeProps> {
             <div>
                 <Preloader isFetching={this.props.isFetching}/>
                 <div>
-                    {pages.map(t => <span onClick={() => this.onChangePage(t)}
-                                          style={this.props.currentPage === t ? {fontWeight: 'bold'} : undefined}>[{t}]</span>)}
+                    {pages.map(t => <span onClick={() => this.onChangePage(t)}>
+                        <button style={this.props.currentPage === t
+                            ? {fontWeight: 'bold', backgroundColor:"lightgreen"}
+                            : {backgroundColor:"lightyellow", margin:"1px"}}>{t}</button>
+                    </span>)}
 
                 </div>
                 {this.props.users.map(t => <div key={t.id}>{t.name}

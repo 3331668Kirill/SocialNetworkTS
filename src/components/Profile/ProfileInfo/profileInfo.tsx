@@ -7,6 +7,8 @@ import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,status:string,
     getUserProfileStatus:(userId:number)=>void,
+    setPhoto?:(file:any)=>void,
+    photos?:any
     setProfileStatus:(status:string) =>void}) => {
 
     props.getUserProfileStatus(props.profile?.userId)
@@ -18,6 +20,14 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
     const onSetStatus = (e:string) => {
       setStatus(e)
      }
+     const setPhotos = (e:any) => {
+        setEditMode(true)
+         console.log(e.target.files)
+        if(e.target.files.length && props.setPhoto){
+            props.setPhoto(e.target.files[0])
+        }
+        setEditMode(false)
+     }
     const setEditModeCB = (e:boolean) => {
         setEditMode(e)
         if (!e){
@@ -26,8 +36,15 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
         }
     }
     if (!props.profile){
+        console.log(props)
+        return (<div>
+            <img src={props.photos} />
+            <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
+                <input type={'file'} onChange={setPhotos}/>
 
-        return <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
+
+        </div>
+    )
         //<Preloader isFetching={true}/>
     }
 

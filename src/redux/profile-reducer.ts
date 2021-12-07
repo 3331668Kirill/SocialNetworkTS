@@ -1,5 +1,5 @@
 import {ActionType} from "./store";
-import {getProfile, getProfileStatus, setProfileStatusOnServer} from "../components/common/api";
+import {getProfile, getProfileStatus, setPhotoOnServer, setProfileStatusOnServer} from "../components/common/api";
 import {Dispatch} from "react";
 
 const ADD_POST = 'ADD-POST';
@@ -7,6 +7,7 @@ const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
 const SET_USER_PROFILE_STATUS_ON_SERVER = 'SET_USER_PROFILE_STATUS_ON_SERVER';
+const SET_PHOTO_ON_SERVER = 'SET_PHOTO_ON_SERVER';
 export type ProfileServerType = {
     aboutMe: string
     contacts: {
@@ -36,7 +37,8 @@ type TypeProfilePage = {
     dialogs: Array<{ id: number, name: string }>
     profile:ProfileServerType
     profileStatus:string
-    status:string
+    status:string,
+    photos: any
 }
 let initialState ={ posts: [
     {id: 1, message: 'Hello bro', likesCount: 12},
@@ -55,12 +57,14 @@ let initialState ={ posts: [
 ],
     profile: null,
     profileStatus:'',
-    status:''
+    status:'',
+    photos: null
 }
 
 
 export const profileReducer = (state: TypeProfilePage&any = initialState,
-                               action: ActionType & {profile:ProfileServerType, profileStatus:string, status:string}) => {
+                               action: ActionType & {profile:ProfileServerType, photos:any,
+                                   profileStatus:string, status:string}) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -78,13 +82,16 @@ export const profileReducer = (state: TypeProfilePage&any = initialState,
             return state
         case SET_USER_PROFILE:
 
-            return {...state,profile:action.profile}
+            return {...state,profile: action.profile}
         case SET_USER_PROFILE_STATUS:
 
             return {...state,profileStatus:action.profileStatus}
         case SET_USER_PROFILE_STATUS_ON_SERVER:
 
             return {...state,status:action.status}
+        case SET_PHOTO_ON_SERVER:
+
+            return {...state,...state.profile,photos:action.photos}
         default:
             return state
     }
@@ -126,6 +133,14 @@ export let setProfileStatusOnServerAC = (status:string) =>{
         status
     }
 }
+export let setPhotoOnServerAC = (photos:any) =>{
+
+    return {
+        type: SET_PHOTO_ON_SERVER,
+        photos
+    }
+}
+
 export let getUserProfile = (userId:number) => (dispatch:Dispatch<{ type:string, profile:ProfileServerType }>)=>{
     getProfile(userId).then(data => {
         dispatch(setUserProfileAC(data))
@@ -142,4 +157,12 @@ export let setProfileStatus = (status:string) => (dispatch:Dispatch<{ type:strin
         dispatch(setProfileStatusOnServerAC(status))
         }
     })
+}
+
+export let setPhoto = (file:any) => async (dispatch:Dispatch<{ type:string, photos:any }>) =>{
+
+    let data = await setPhotoOnServer(file)
+    if (data.data.resultCode===0){
+        dispatch(setPhotoOnServerAC(data.data.data.photos.large))
+    }
 }

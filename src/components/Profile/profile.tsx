@@ -3,7 +3,7 @@ import s from './profile.module.css'
 import ProfileInfo from "./ProfileInfo/profileInfo";
 import {PropsPostType} from "./MyPosts/Post/Post";
 import MyPostsConteiner from "./MyPosts/MyPostsConteiner";
-import {getUserProfileStatus, ProfileServerType} from "../../redux/profile-reducer";
+import {ProfileServerType} from "../../redux/profile-reducer";
 
 
 const Profile = (props: { post: Array<PropsPostType>,
@@ -12,11 +12,14 @@ const Profile = (props: { post: Array<PropsPostType>,
     profile:ProfileServerType
     profileStatus:string
     status:string
+    photos:any
     getUserProfileStatus:(userId:number)=>void
+    setPhoto:(file:any)=>void
     setProfileStatus:(status:string) =>void
 
 }) => {if (!props.profile){
-    return <ProfileInfo profile={props.profile} setProfileStatus={props.setProfileStatus} status={props.status}
+    return <ProfileInfo profile={props.profile} setProfileStatus={props.setProfileStatus}
+                        status={props.status} setPhoto={props.setPhoto} photos={props.photos}
                         getUserProfileStatus={props.getUserProfileStatus} profileStatus={props.profileStatus}/>
 }
    // if (!props.isAuth) { return <Redirect to={'/login'}/>}
