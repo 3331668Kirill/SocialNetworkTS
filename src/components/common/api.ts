@@ -47,3 +47,4 @@ export const setPhotoOnServer = (file:any) =>{
         headers:{'Content-Type': 'multipart/form-data'}
     })
 }
+

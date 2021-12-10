@@ -4,28 +4,30 @@ import ProfileInfo from "./ProfileInfo/profileInfo";
 import {PropsPostType} from "./MyPosts/Post/Post";
 import MyPostsConteiner from "./MyPosts/MyPostsConteiner";
 import {ProfileServerType} from "../../redux/profile-reducer";
+import {WithAuthRedirect} from "../hoc/withAuthRedirect";
 
 
 const Profile = (props: { post: Array<PropsPostType>,
-    auth?:boolean
+    auth?:{id:number,email:string, login:string, isAuth:boolean}
     newPostText:string
     profile:ProfileServerType
     profileStatus:string
     status:string
     photos:any
+    getUserProfile:(userId:number) =>void
     getUserProfileStatus:(userId:number)=>void
     setPhoto:(file:any)=>void
     setProfileStatus:(status:string) =>void
 
 }) => {if (!props.profile){
-    return <ProfileInfo profile={props.profile} setProfileStatus={props.setProfileStatus}
-                        status={props.status} setPhoto={props.setPhoto} photos={props.photos}
-                        getUserProfileStatus={props.getUserProfileStatus} profileStatus={props.profileStatus}/>
+    if (props.auth) props.getUserProfile(props.auth?.id)
+
 }
-   // if (!props.isAuth) { return <Redirect to={'/login'}/>}
+
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile} setProfileStatus={props.setProfileStatus} status={props.status}
+            <ProfileInfo profile={props.profile} setProfileStatus={props.setProfileStatus}
+                         status={props.status} auth={props.auth}
                          getUserProfileStatus={props.getUserProfileStatus} profileStatus={props.profileStatus}/>
             <MyPostsConteiner post={props.post}
                       newPostText={props.newPostText}/>

@@ -16,7 +16,7 @@ const mapStateToProps:any = (state:AppStateType) =>{
         d:state.profilePage.dialogs,
         m:state.messagePage.messages,
         b:state.messagePage.newMessageBody,
-        auth:state.authPage.data.isAuth,
+        auth:state.authPage.data,
        supermessage: text      // можно добавить и св-во дополнительно попадет в пропсы Dialogs
     }
 }

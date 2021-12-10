@@ -20,11 +20,11 @@ export const News = () => {
 
     useEffect(() => {
             document.addEventListener('scroll', scrollHandler)
-            // return function () {                                     ???????
-            //     document.removeEventListener('scroll', scrollHandler)  ???????
-            // }
-        }, []
-    )
+            return function () {
+                document.removeEventListener('scroll', scrollHandler)
+            }
+        }, [])
+
 
     const scrollHandler = (e:any) => {
         if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop+window.innerHeight) < 100

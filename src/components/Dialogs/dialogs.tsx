@@ -15,7 +15,7 @@ export type PropsDialogsType = {
     d: Array<PropsDialogItem>
     m: Array<{ id: number, message: string }>
     b:string
-    auth?:boolean
+    auth?:{id:number,email:string, login:string, isAuth:boolean}
     supermessage?:string
     onNewMessageChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
     onSendMessageClick:() => void

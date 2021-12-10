@@ -26,7 +26,7 @@ type ProfileType = {
     setProfileStatus:(status:string) =>void
 }
 
-class ProfileContainer extends React.Component<ProfileType> {
+class ProfileContain extends React.Component<ProfileType> {
 
    render() {
         console.log(this.props.status)
@@ -46,10 +46,10 @@ const mapStateToProps: any = (state: AppStateType) => {
         profileStatus: state.profilePage.profileStatus,
         status: state.profilePage.status,
         photos:state.profilePage.photos,
-        auth: state.authPage.data.isAuth
+        auth: state.authPage.data
 
     }
 }
-
-export default connect(mapStateToProps, {getUserProfile, setPhoto,
-    getUserProfileStatus, setProfileStatus})(WithAuthRedirect(ProfileContainer))
+const ProfileContainer = connect(mapStateToProps, {getUserProfile, setPhoto,
+    getUserProfileStatus, setProfileStatus})(WithAuthRedirect(ProfileContain))
+export default ProfileContainer

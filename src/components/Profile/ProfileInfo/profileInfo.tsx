@@ -9,6 +9,7 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
     getUserProfileStatus:(userId:number)=>void,
     setPhoto?:(file:any)=>void,
     photos?:any
+    auth?:{id:number,email:string, login:string, isAuth:boolean}
     setProfileStatus:(status:string) =>void}) => {
 
     props.getUserProfileStatus(props.profile?.userId)
@@ -36,16 +37,14 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
         }
     }
     if (!props.profile){
+
         console.log(props)
         return (<div>
             <img src={props.photos} />
             <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
                 <input type={'file'} onChange={setPhotos}/>
-
-
         </div>
     )
-        //<Preloader isFetching={true}/>
     }
 
 
@@ -64,10 +63,14 @@ const ProfileInfo = (props:{profile:ProfileServerType, profileStatus:string,stat
                 src={props.profile.photos.small
                     ? props.profile.photos.small
                     :'https://igel.com.ua/image/cachecatalog/NASIPNYE/%D1%84%D0%BE%D1%82%D0%BE-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE-%D0%BE%D1%82%D1%81%D1%83%D1%82%D1%81%D1%82%D0%B2%D1%83%D0%B5%D1%82-3000x3000.jpg'}/>
+            {props.profile.userId === props.auth?.id &&
             <div className={s.description}>
+                <img src={props.photos} />
                 <ProfileStatus status={status} setStatus={onSetStatus} editMode={editMode} setEditMode={setEditModeCB}/>
+                Change photo:
+                <input type={'file'} onChange={setPhotos}/>
             </div>
-
+            }
         </div>
     )
 }
