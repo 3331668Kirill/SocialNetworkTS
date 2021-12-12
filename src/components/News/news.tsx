@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Preloader} from "../common/Preloader";
 
 export const News = () => {
     const [photos, setPhotos] = useState<Array<any>>([])
@@ -39,6 +40,7 @@ export const News = () => {
 
     return (<>
             <div>NEWS</div>
+            <Preloader isFetching={fetching}/>
             <div>
                 {photos.map(ph => <div>
                         <div> {ph.title}  </div>

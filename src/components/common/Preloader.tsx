@@ -5,6 +5,7 @@ type PreloaderType = {
     isFetching:boolean
 }
 
+
 export const Preloader = (props:PreloaderType) => {
 
 
