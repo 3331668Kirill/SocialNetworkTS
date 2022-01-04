@@ -4,7 +4,7 @@ import "./modal.css"
 type ModalPropsType = {
     active:boolean
     setActive:Dispatch<boolean>
-    children:any
+    children:React.ReactChild | React.ReactNode
 }
 
 

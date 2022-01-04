@@ -2,8 +2,8 @@ import React, {ChangeEvent, ReactElement} from 'react'
 import s from './dialogs.module.css'
 import DialogItem from "./DialogItem/dialogItem";
 import Message from "./Message/message";
-import { StoreContext } from '../../storeContext';
-import {Redirect} from "react-router-dom";
+
+
 
 
 
@@ -42,11 +42,6 @@ const Dialogs = (props: PropsDialogsType) => {
             <div className={s.dialogs_items}>
                 {dialogsElements}
                 {props.supermessage}
-                {/*<StoreContext.Consumer>*/}
-
-                {/*    {value => <div>{value} </div>}*/}
-
-                {/*</StoreContext.Consumer>*/}
 
             </div>
             <div className={s.messages}>
