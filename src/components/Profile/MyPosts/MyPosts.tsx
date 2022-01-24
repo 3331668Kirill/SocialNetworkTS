@@ -1,14 +1,15 @@
 import React, {ReactElement, RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post, {PropsPostType} from "./Post/Post";
+import css from '../../Dialogs/dialogs.module.css'
 
 
 type TextType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | null
 
 const MyPosts = (props: {
     post: Array<PropsPostType>,
-    updateNewPostText:(text:TextType)=>void
-    addPost:(text:TextType)=>void
+    updateNewPostText: (text: TextType) => void
+    addPost: (text: TextType) => void
     newPostText: string
 
 
@@ -32,20 +33,21 @@ const MyPosts = (props: {
     }
 
     return (
-        <div>
-            <div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+        <div className={s.content}>
+            <div className={css.input}>
+                <textarea className={css.input_text} onChange={onPostChange} ref={newPostElement}
+                          value={props.newPostText}/>
             </div>
             <div>
-                <button onClick={addPost} disabled={!props.newPostText}> Add post </button>
-                {!props.newPostText && <span style={{color:'red'}}>text is required! Enter the text in the field</span>}
+                <button className={css.button} onClick={addPost} disabled={!props.newPostText}> Add post</button>
+                {/*{!props.newPostText &&*/}
+                {/*<span style={{color: 'red'}}>text is required! Enter the text in the field</span>}*/}
             </div>
             <div className={s.postBlock}>My Posts</div>
-            <div>
-                New Posts
-                <div className={s.posts}>New Post</div>
+
+            <div className={css.message}>
+                {postsElements}
             </div>
-            {postsElements}
         </div>
     )
 }

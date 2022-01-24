@@ -2,6 +2,8 @@ import React from "react";
 import {TypeUsers} from "../../redux/users-reducer";
 import {Preloader} from "../common/Preloader";
 import {NavLink} from "react-router-dom";
+import css from "./users.module.css"
+import userImage from "./noimageavailable.jpg"
 
 
 type UsersTypeProps = {
@@ -60,44 +62,46 @@ export class Users extends React.Component<UsersTypeProps> {
             pages.push(i)
         }
 
-        return (
-            <div>
-                <Preloader isFetching={this.props.isFetching}/>
+        return (<>
+                <div className={css.preloader}>
+                    <Preloader isFetching={this.props.isFetching}/>
+                </div>
                 <div>
-                    {pages.map(t => <span onClick={() => this.onChangePage(t)}>
-                        <button style={this.props.currentPage === t
-                            ? {fontWeight: 'bold', backgroundColor:"lightgreen"}
-                            : {backgroundColor:"lightyellow", margin:"1px"}}>{t}</button>
+
+                    <div className={css.button_block}>
+                        {pages.map(t => <span onClick={() => this.onChangePage(t)}>
+                        <button className={this.props.currentPage === t
+                            ? css.button_active
+                            : css.button}>{t}</button>
                     </span>)}
 
-                </div>
-                {this.props.users.map(t => <div key={t.id}>{t.name}
-                    <span>
-                <div>
+                    </div>
+                    {this.props.users.map(t => <div className={css.user} key={t.id}>
+                    <span className={css.user_name}>{t.name}
+                        <div>
                     <NavLink to={'/profile/' + t.id} onClick={() => this.onChangeProfile(t.id)}>
-                    <img
-                        src={t.photos.small ? t.photos.small : 'https://www.meme-arsenal.com/memes/87d4bfeed251dba0ce946e9e594dbdb6.jpg'}/>
+                    <img className={css.img}
+                         src={t.photos.small ? t.photos.small : userImage}/>
                     </NavLink>
                 </div>
                 <div>
                     {t.followed
                         ? <button disabled={this.props.isFetching}
+                                  className={css.button}
                                   onClick={() => this.unFollowChange(t.id)}>Unfollow</button>
                         : <button disabled={this.props.isFetching}
+                                  className={css.button}
                                   onClick={() => this.followChange(t.id)}>Follow</button>}
 
                 </div>
             </span>
-                    <span>
-                  <div>{t.status}</div>
-              </span>
-                    <span>
-                  <div>{'t.location.city'}</div>
-                  ---------------------------------
-              </span>
 
-                </div>)}
-            </div>
+
+                        </div>
+                    )
+                    }
+                </div>
+            </>
         )
     }
 }

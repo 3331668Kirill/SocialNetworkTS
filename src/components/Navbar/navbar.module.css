@@ -1,13 +1,32 @@
+* {margin: 0;padding: 0;outline: none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+*:after, *:before { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {  display: block;}
+html {font-size: 100%;height: auto !important;height: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}
+.clear {display: block;	}
+.clear::after {clear: both;content: ".";display: block;height: 1px;visibility: hidden;}
+
+
+
+
+
 .nav {
+    background: linear-gradient(to left,rgba(54,194,182,0.96) 0,rgba(62,188,207,0.96) 100%);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    z-index: 1000;
     width: 150px;
-    height: 120px;
-    grid-area: n;
-    background-color: yellow;
+    height: 68vmax;
+
 }
 
 .item {
+    margin-top: 15px;
+    margin-left: 30px;
     color: black;
 }
+.item:hover{
+    background: rgba(58,162,173,1);
+}
 .item a.active {
-    color: red;
+    color: #030328;
 }

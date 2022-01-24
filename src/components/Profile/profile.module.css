@@ -1,9 +1,4 @@
-/*.content {*/
-/*    grid-area: c;*/
-/*    background-color: aquamarine;*/
-/*    !*margin-left: 200px;*!*/
-/*}*/
-/*.content img{*/
-/*    width: 300px;*/
-/*    height: 300px;*/
-/*}*/
+.content {
+    display: flex;
+    justify-content: space-around;
+}

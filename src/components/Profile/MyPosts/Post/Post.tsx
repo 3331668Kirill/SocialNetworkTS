@@ -16,8 +16,7 @@ const Post = (props: PropsPostType) => {
             <div className={s.item}>
                 <img src={'https://www.meme-arsenal.com/memes/87d4bfeed251dba0ce946e9e594dbdb6.jpg'}/>
                 {props.message}
-                <div><span>   like {props.likesCount}  </span></div>
-                <span>  dislike</span>
+
             </div>
 
 

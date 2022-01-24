@@ -1,9 +1,10 @@
 import axios from "axios";
 
+
 const axiosInstance = axios.create(
 {withCredentials: true,
     baseURL:'https://social-network.samuraijs.com/api/1.0/',
-    headers:{"API-KEY":"2b581a81-54b7-49eb-a649-1f6bdf6715c4"}
+    headers:{"API-KEY":"0b887150-9918-4354-a1e5-bd7a84ebf7a7"}
 }
 )
 
@@ -32,13 +33,27 @@ export  const unFollowChange = (id:number) =>{
 }
 export  const followChange = (id:number) =>{
     return axiosInstance.post(`follow/${id}`)
-        .then(responce => responce.data)
+        .then(responce => {
+           return responce.data
+        })
 }
 
 export const authMe = () =>{
     return axiosInstance.get(`auth/me`)
         .then(responce => responce.data)
 }
+
+export const authorization = (email:string,password:string) =>{
+    return axiosInstance.post(`auth/login`,{email,password})
+        .then(responce => responce.data)
+}
+export const disAuthorization = () =>{
+    return axiosInstance.delete(`auth/login`,)
+        .then(responce => {
+            return responce.data
+        })
+}
+
 
 export const setPhotoOnServer = (file:any) =>{
     const formData = new FormData()

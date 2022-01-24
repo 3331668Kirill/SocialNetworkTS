@@ -1,27 +1,48 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import s from './header.module.css'
-import {getAuthUserData} from "../../redux/auth-reducer";
+import css from '../Dialogs/dialogs.module.css'
+import img from './image.jpeg'
+import {disAuthorization} from "../common/api";
+
 
 export type HeaderPropsType = {
-    isAuth:boolean
-    login:string
-    //setAuthUserDataAC:(state:{id: number, login: string, email: string})=>void
-    getAuthUserData: () =>void
+    isAuth: boolean
+    login: string
+    getAuthUserData: () => void
+    getDisAuth: any
 }
 
 
-const Header = (props:HeaderPropsType) => {
-    console.log(props)
+const Header = (props: HeaderPropsType) => {
+
+
     return (<div>
 
-            <img src={'https://st2.depositphotos.com/4035913/6124/i/600/depositphotos_61243831-stock-photo-letter-s-logo.jpg'} />
-        <div className={s.login}>
-            { props.isAuth
-                ? props.login
-                : <NavLink to={'/login'}>Login</NavLink>
-            }
-        </div>
+            <img src={img}/>
+
+            <div className={s.login}>
+                {props.isAuth
+                    ? <span> {props.login}
+                        <button className={css.button} onClick={() => {
+                            disAuthorization().then(data => {
+
+                                if (data.resultCode === 0) props.getDisAuth()
+                            })
+                        }}> LOG OUT</button>
+                    </span>
+                    : <NavLink to={'/login'}>
+                        <button className={css.button}>LOG IN</button>
+                    </NavLink>
+                }
+
+                <div>
+
+
+                </div>
+
+
+            </div>
 
         </div>
     )

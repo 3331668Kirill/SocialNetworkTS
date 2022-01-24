@@ -4,9 +4,6 @@ import DialogItem from "./DialogItem/dialogItem";
 import Message from "./Message/message";
 
 
-
-
-
 export type PropsDialogItem = {
     id: number
     name: string
@@ -14,17 +11,17 @@ export type PropsDialogItem = {
 export type PropsDialogsType = {
     d: Array<PropsDialogItem>
     m: Array<{ id: number, message: string }>
-    b:string
-    auth?:{id:number,email:string, login:string, isAuth:boolean}
-    supermessage?:string
-    onNewMessageChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
-    onSendMessageClick:() => void
+    b: string
+    auth?: { id: number, email: string, login: string, isAuth: boolean }
+    supermessage?: string
+    onNewMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    onSendMessageClick: () => void
 
 }
 
 const Dialogs = (props: PropsDialogsType) => {
     console.log(props)
-   let dialogsElements: Array<ReactElement> = props.d.map(dialogs => (
+    let dialogsElements: Array<ReactElement> = props.d.map(dialogs => (
         <DialogItem name={dialogs.name} id={dialogs.id}/>))
 
     let messagesElements: Array<ReactElement> = props.m.map(m => (<Message message={m.message}/>))
@@ -32,7 +29,7 @@ const Dialogs = (props: PropsDialogsType) => {
         props.onSendMessageClick()
     }
     let newMessageBody = props.b
-    const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>)=>{
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onNewMessageChange(e)
     }
 
@@ -41,15 +38,17 @@ const Dialogs = (props: PropsDialogsType) => {
 
             <div className={s.dialogs_items}>
                 {dialogsElements}
-                {props.supermessage}
+
 
             </div>
+
             <div className={s.messages}>
-                <div>{messagesElements}</div>
-                <div>
-                    <div><textarea value={newMessageBody} onChange={onNewMessageChange} placeholder={'enter your message'}> </textarea></div>
+                <div className={s.message_block}>{messagesElements}</div>
+                <div className={s.input}>
+                    <div><textarea className={s.input_text} value={newMessageBody} onChange={onNewMessageChange}
+                                   placeholder={'enter your message'}> </textarea></div>
                     <div>
-                        <button onClick={onSendMessageClick}> add message</button>
+                        <button className={s.button} onClick={onSendMessageClick}> add message</button>
                     </div>
                 </div>
             </div>

@@ -1,23 +1,114 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    display: flex;
+    width: 70%;
+    position: relative;
+    height: 90vh;
 }
 
-.dialog {
-
+.dialog_user {
+    text-align: center;
+    align-self: center;
+    height: 60px;
+    width: 60px;
+    font-weight: bold;
+    border: black solid 1px;
+    border-radius: 100%;
 }
 
 .dialogs_items {
-    padding: 10px;
+    min-width: 55%;
+    margin-right: 30px;
+    height: 90%;
+    padding: 20px 0 30px;
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-end;
+    align-items: flex-end;
 }
-.dialogs_items .active{
+
+.dialogs_items .active {
     color: red;
 }
 
 .messages {
-    padding: 10px;
+    min-width: 55%;
+    padding: 20px 0 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .message {
+    margin: 1px 0 0 10px;
+    width: max-content;
+    padding: 10px;
+    border-radius: 0.75rem;
+    background-color: rgba(0, 0, 0, .85);
+    color: wheat;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.message_block {
+    height: 300px;
+    display: contents;
+}
+
+.button {
+    align-items: center;
+    background-color: initial;
+    background-image: linear-gradient(rgba(132, 201, 180, 0.84), rgba(4, 74, 154, 0.84) 50%);
+    border-radius: 42px;
+    border-width: 0;
+    box-shadow: rgb(57 31 91 ) 0 2px 2px, rgb(179 132 201 ) 0 8px 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    font-family: Quicksand, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: .04em;
+    line-height: 10px;
+    margin: 5px;
+    padding: 18px 18px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: rgb(255 255 255 ) 0 0 4px, rgb(255 255 255) 0 0 12px, rgb(57 31 91 ) 1px 1px 4px, rgb(57 31 91 ) 4px 4px 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+}
+
+
+.input {
+    position: relative;
+}
+
+.input_text {
+    display: block;
+    margin: 10px;
+    color: inherit;
+    width: 90%;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: inherit;
+    border: black solid 1px;
+    border-radius: 0.4rem;
+}
+
+.input_text::placeholder {
+    color: #B0BEC5;
+}
+
+.input_text:focus {
+    outline: none;
 
 }

@@ -9,9 +9,9 @@ type PreloaderType = {
 export const Preloader = (props:PreloaderType) => {
 
 
-    return(<div>
+    return(<>
             {props.isFetching ? <img style={{width:'50px', height:'50px'}}
                                           src={logo}/> : null}
-        </div>
+        </>
     )
 }

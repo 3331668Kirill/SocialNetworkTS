@@ -29,7 +29,7 @@ type ProfileType = {
 class ProfileContain extends React.Component<ProfileType> {
 
    render() {
-        console.log(this.props.status)
+
 
         return (
             <div className={s.content}>
@@ -40,7 +40,7 @@ class ProfileContain extends React.Component<ProfileType> {
 }
 
 const mapStateToProps: any = (state: AppStateType) => {
-
+    console.log(state)
     return {
         profile: state.profilePage.profile,
         profileStatus: state.profilePage.profileStatus,

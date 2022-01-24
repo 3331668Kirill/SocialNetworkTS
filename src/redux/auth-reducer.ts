@@ -59,9 +59,20 @@ export let setAuthUserDataAC = (state:{id: number, login: string, email: string}
 }
 
 export const getAuthUserData = () => (dispatch:Dispatch<{id: number, login: string, email: string}>)=>{
+    console.log("start")
     authMe().then(data => {
+        console.log("authme")
         if (data.resultCode===0) {
+            console.log("authme res")
             dispatch(setAuthUserDataAC(data.data))
         }
+
     })
 }
+export const getDisAuth = () => (dispatch:Dispatch<{type:string,isAuth:boolean}>)=>{
+
+    console.log("dis auth")
+            dispatch({type:SET_IS_AUTH,isAuth:false})
+
+
+    }

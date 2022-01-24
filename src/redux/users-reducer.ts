@@ -164,6 +164,7 @@ export const followTnunk = (id: number) => {
     return (dispatch: Dispatch<SetIsFetchingACType | FollowACType>) => {
         dispatch(setIsFetchingActionCreator(true))
         followChange(id).then(data => {
+
             if (data.resultCode === 0) {
                 dispatch(followActionCreator(id))
                 dispatch(setIsFetchingActionCreator(false))

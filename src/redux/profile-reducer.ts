@@ -42,18 +42,12 @@ type TypeProfilePage = {
 }
 let initialState ={ posts: [
     {id: 1, message: 'Hello bro', likesCount: 12},
-    {id: 2, message: 'First post', likesCount: 48},
-    {id: 3, message: 'How are you', likesCount: 23},
-    {id: 4, message: 'Ha ha ha', likesCount: 47},
-    {id: 5, message: 'Bye', likesCount: 5}
+
 ],
-    newPostText: 'input here',
+    newPostText: '',
     dialogs: [
-    {id: 1, name: 'Dims'},
-    {id: 2, name: 'Ann'},
-    {id: 3, name: 'Irina'},
-    {id: 4, name: 'Patrick'},
-    {id: 5, name: 'Vova'}
+    {id: 1, name: 'Ann'},
+
 ],
     profile: null,
     profileStatus:'',
@@ -72,7 +66,7 @@ export const profileReducer = (state: TypeProfilePage&any = initialState,
                 message: state.newPostText,
                 likesCount: 0
             }
-            state = {...state, posts:[...state.posts, newPost], newPostText:''}  //state.posts.push(newPost)
+            state = {...state, posts:[...state.posts, newPost], newPostText:''}
 
 
             return state
