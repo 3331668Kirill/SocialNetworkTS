@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/SocialNetworkTS/static/css/main.43fedef2.chunk.css",
+    "main.js": "/SocialNetworkTS/static/js/main.eeda1cbf.chunk.js",
+    "main.js.map": "/SocialNetworkTS/static/js/main.eeda1cbf.chunk.js.map",
+    "runtime-main.js": "/SocialNetworkTS/static/js/runtime-main.a02c49c5.js",
+    "runtime-main.js.map": "/SocialNetworkTS/static/js/runtime-main.a02c49c5.js.map",
+    "static/js/2.a97367f3.chunk.js": "/SocialNetworkTS/static/js/2.a97367f3.chunk.js",
+    "static/js/2.a97367f3.chunk.js.map": "/SocialNetworkTS/static/js/2.a97367f3.chunk.js.map",
+    "static/js/3.f6716c8c.chunk.js": "/SocialNetworkTS/static/js/3.f6716c8c.chunk.js",
+    "static/js/3.f6716c8c.chunk.js.map": "/SocialNetworkTS/static/js/3.f6716c8c.chunk.js.map",
+    "index.html": "/SocialNetworkTS/index.html",
+    "static/css/main.43fedef2.chunk.css.map": "/SocialNetworkTS/static/css/main.43fedef2.chunk.css.map",
+    "static/js/2.a97367f3.chunk.js.LICENSE.txt": "/SocialNetworkTS/static/js/2.a97367f3.chunk.js.LICENSE.txt",
+    "static/media/noimageavailable.09ea9f6b.jpg": "/SocialNetworkTS/static/media/noimageavailable.09ea9f6b.jpg",
+    "static/media/spinning-circles.e84674d2.svg": "/SocialNetworkTS/static/media/spinning-circles.e84674d2.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a02c49c5.js",
+    "static/js/2.a97367f3.chunk.js",
+    "static/css/main.43fedef2.chunk.css",
+    "static/js/main.eeda1cbf.chunk.js"
+  ]
+}
